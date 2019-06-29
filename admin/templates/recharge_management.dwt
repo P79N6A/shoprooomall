@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>{include file ='library/admin_html_head.lbi'}</head>
+
+<body class="iframe_body"> 
+    <div class="warpper">
+        <div class="title">{$lang.31_fund} - {$lang.03_recharge_management}</div>
+        <div class="content">
+            <div class="explanation" id="explanation">
+                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <ul>
+                    <li>{$lang.operation_prompt_content.summary_of_money.0}</li>
+                </ul>
+            </div>
+            <div class="flexilist mt30">
+                <div class="common-content">
+                    <div class="switch_info">
+                        <div class="stat_order_search stat_order_search2">
+                            <form action="" method="post" id="" name="selectForm">
+                                <div class="search_item">
+                                    <strong class="label_txt">{$lang.keywords}：</strong>
+                                    <input type="text" name="keywords" class="text w250" autocomplete="off" placeholder="{$lang.search_placeholder}">
+                                </div>
+                                <div class="search_item">
+                                    <strong class="label_txt">{$lang.payment_method}：</strong>
+                                    <div class="imitate_select select_w145">
+                                        <div class="cite">{$lang.please_select}</div>
+                                        <ul>
+                                            <li><a href="javascript:;" data-value="pc" class="ftx-01">PC</a></li>
+                                            <li><a href="javascript:;" data-value="touch" class="ftx-01">WAP</a></li>
+                                            <li><a href="javascript:;" data-value="mobile" class="ftx-01">APP</a></li>
+                                            <li><a href="javascript:;" data-value="ecjia-cashdesk" class="ftx-01">{$lang.cashdesk}</a></li>
+                                        </ul>
+                                        <input name="order_referer" type="hidden" value="" id="order_referer_val">
+                                    </div>
+                                </div>
+                                <div class="search_item">
+                                    <strong class="label_txt">{$lang.payment_state}：</strong>
+                                    <div class="imitate_select select_w145">
+                                        <div class="cite">{$lang.please_select}</div>
+                                        <ul>
+                                            <li><a href="javascript:;" data-value="pc" class="ftx-01">PC</a></li>
+                                            <li><a href="javascript:;" data-value="touch" class="ftx-01">WAP</a></li>
+                                            <li><a href="javascript:;" data-value="mobile" class="ftx-01">APP</a></li>
+                                            <li><a href="javascript:;" data-value="ecjia-cashdesk" class="ftx-01">{$lang.cashdesk}</a></li>
+                                        </ul>
+                                        <input name="order_referer" type="hidden" value="" id="order_referer_val">
+                                    </div>
+                                </div>
+                                <div class="search_item">
+                                    <strong class="label_txt">&nbsp</strong>
+                                    <a href="javascript:void(0);" class="btn btn30 blue_btn ml0"><i class="icon icon-search"></i>{$lang.btn_search}</a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="query_result mt30">
+                            <div class="common-head">
+                                <div class="fl">
+                                    <div class="fbutton m0" id="fbutton_1"><a href="javascript:void(0);"><div class="csv" title="{$lang.export_list}"><span><i class="icon icon-download-alt"></i>{$lang.export_list}</span></div></a></div>
+                                </div>
+                                <div class="refresh">
+                                    <div class="refresh_tit" onclick="getList(this)" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
+                                    <div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                                </div>
+                            </div>
+                            <div class="list-div" id="listDiv">
+                                <table cellpadding="0" cellspacing="0" border="0">
+                                    <thead>
+                                    <tr>
+                                        <th width="10%"><div class="tDiv">{$lang.recharge_time}</div></th>
+                                        <th width="10%"><div class="tDiv">{$lang.user_name}</div></th>
+                                        <th width="10%"><div class="tDiv">{$lang.recharge_total}</div></th>
+                                        <th width="10%"><div class="tDiv">{$lang.user_message}</div></th>
+                                        <th width="10%"><div class="tDiv">{$lang.state}</div></th>
+                                        <th width="10%"><div class="tDiv">{$lang.payment_method}</div></th>
+                                        <th width="10%" class="handle">{$lang.handler}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {foreach from=$detail item=vo}
+                                    <tr>
+                                        <td><div class="tDiv">{$vo.shop_name}</div></td>
+                                        <td><div class="tDiv">{$vo.give_integral|default:0}</div></td>
+                                        <td><div class="tDiv">{$vo.rank_integral|default:0}</div></td>
+                                        <td><div class="tDiv">{$vo.give_integral|default:0}</div></td>
+                                        <td><div class="tDiv">{$vo.rank_integral|default:0}</div></td>
+                                        <td><div class="tDiv">{$vo.give_integral|default:0}</div></td>
+                                        <td class="handle">
+                                            <div class="tDiv">
+                                                <a href="exchange_detail.php?act=exchange_goods&user_id={$vo.user_id}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.view_goods}</a>
+                                                <a href="exchange_detail.php?act=order_view&user_id={$vo.user_id}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.view_order}</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {foreachelse}
+                                    <tr>
+                                        <td colspan="12" class="no_record"><div class="tDiv">{$lang.no_records}</div></td>
+                                    </tr>
+                                    {/foreach}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="12">
+                                            <div class="list-page">
+                                                {include file="library/page.lbi"}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	{include file ='library/pagefooter.lbi'}
+	<script type="text/javascript">
+        //分页传值
+        listTable.recordCount = {$record_count|default:0};
+        listTable.pageCount = {$page_count|default:1};
+        listTable.url = "exchange_detail.php?is_ajax=1";
+        listTable.query = "detail_query";
+    
+        {foreach from=$filter item=item key=key}
+        listTable.filter.{$key} = '{$item}';
+        {/foreach}
+        
+        function getList()
+        {
+            var act = 'detail_query';
+            $.ajax({
+                url:"exchange_detail.php?is_ajax=1",
+                dataType:"json",
+                type:'post',
+                data:{
+                    "act" : act,
+                },
+                success:function(data){
+                    $('.list-div').eq(0).html(data.content);
+                }
+            })
+        }
+    
+        //导出报表(销售明细)
+        $('#fbutton_1').click(function(){
+            location.href='exchange_detail.php?act=download';
+        })
+    </script>
+</body>
+</html>

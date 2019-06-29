@@ -1,0 +1,2 @@
+
+把themes以及默认图片drp_bg.png上传到目录 data/attached/qrcode下。

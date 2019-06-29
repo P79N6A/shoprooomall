@@ -1,0 +1,3 @@
+<div class="albumContent">
+    <textarea name="text" class="dialogTextarea" placeholder="{$lang.max_input_500_words}">{$content}</textarea>
+</div>

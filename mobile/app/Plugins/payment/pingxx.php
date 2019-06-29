@@ -1,0 +1,7 @@
+<?php
+//SHOPROOO 
+class pingxx
+{}
+
+
+?>

@@ -1,0 +1,107 @@
+{if $full_page}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>{include file ='library/seller_html_head.lbi'}</head>
+
+<body>
+{include file ='library/seller_header.lbi'}
+<div class="ecsc-layout">
+    <div class="site wrapper">
+        {include file ='library/seller_menu_left.lbi'}
+        <div class="ecsc-layout-right">
+            <div class="main-content" id="mainContent">
+                {include file ='library/url_here.lbi'}
+				{include file ='library/seller_menu_tab.lbi'}
+                <div class="search-info">
+                    <div class="search-form">
+					{if $parent_id > 0}
+                    	<a href="category_store.php?act=list&parent_id={$parent_id}&back_level={$level}" class="sc-btn sc-blue-btn"><i class="icon icon-reply"></i>&nbsp;{$lang.go_back_level}</a>
+					{/if}
+                    </div>
+                </div>
+                <div class="list-div" id="listDiv">
+                {/if}
+                <table id="list-table" class="ecsc-default-table">
+					<thead>
+						<tr>
+							<th width="4%"><div class="tDiv">{$lang.record_id}</div></th>
+							<th width="9%"><div class="tDiv">{$lang.our_shop_price}</div></th>
+							<th width="9%"><div class="tDiv">{$lang.fixed_freight}</div></th>
+							<th width="9%"><div class="tDiv">{$lang.promotion_price}</div></th>
+							<th width="9%"><div class="tDiv">{$lang.user_price}</div></th>
+							<th width="9%"><div class="tDiv">{$lang.step_price}</div></th>
+							<th width="9%"><div class="tDiv">{$lang.consumption_integral}</div></th>
+							<th width="9%"><div class="tDiv">{$lang.rank_integral}</div></th>
+							<th width="9%"><div class="tDiv">{$lang.weight}</div></th>
+							<th width="9%"><div class="tDiv">{$lang.is_on_sale}</div></th>
+							<th width="12%"><div class="tDiv">{$lang.handler_info}</div></th>
+						</tr>
+					</thead>
+					<tbody>
+						{foreach from=$log_list item=list}
+						<tr>
+							<td><div class="tDiv">{$list.log_id}</div></td>
+							<td><div class="tDiv">{if $list.old_record}{$lang.label_yuan}{else}{$lang.label_xian}{/if}{$list.shop_price}</div></td>
+							<td><div class="tDiv">{if $list.old_record}{$lang.label_yuan}{else}{$lang.label_xian}{/if}{$list.shipping_fee}</font></div></td>
+							<td><div class="tDiv">{if $list.old_record}{$lang.label_yuan}{else}{$lang.label_xian}{/if}{$list.promote_price}</div></td>
+							<td><div class="tDiv">{if $list.old_record}{$lang.label_yuan}{else}{$lang.label_xian}{/if}<a href="javascript:;" ectype="view_detail" data-logid="{$list.log_id}" data-step="member">{$lang.view_info}</a></div></td>
+							<td><div class="tDiv">{if $list.old_record}{$lang.label_yuan}{else}{$lang.label_xian}{/if}<a href="javascript:;" ectype="view_detail" data-logid="{$list.log_id}" data-step="volume">{$lang.view_info}</a></div></td>
+							<td><div class="tDiv">{if $list.old_record}{$lang.label_yuan}{else}{$lang.label_xian}{/if}{$list.give_integral}</font></div></td>
+							<td><div class="tDiv">{if $list.old_record}{$lang.label_yuan}{else}{$lang.label_xian}{/if}{$list.rank_integral}</div></td>
+							<td><div class="tDiv">{if $list.old_record}{$lang.label_yuan}{else}{$lang.label_xian}{/if}{$list.goods_weight}</div></td>
+							
+							<td><div class="tDiv">{if $list.old_record}{$lang.label_yuan}{else}{$lang.label_xian}{/if}{if $list.is_on_sale}{$lang.on_sale_in}{else}{$lang.not_on_sale_in}{/if}</div></td>
+							<td>
+								<div class="tDiv">
+									<p>{$list.admin_name}</p>
+									<p>{$list.handle_time}</p>
+								</div>
+							</td>
+						</tr>
+						{foreachelse}
+						<tr><td class="no-records" colspan="12">{$lang.no_records}</td></tr>
+						{/foreach}
+					</tbody>
+                </table>
+					{include file="page.dwt"}
+                    {if $full_page}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file ='library/seller_footer.lbi'}
+	{insert_scripts files="jquery.purebox.js"}   
+	<script type="text/javascript">
+	listTable.recordCount = {$record_count|default:0};
+	listTable.pageCount = {$page_count|default:1};
+	listTable.query = 'view_query';
+
+	{foreach from=$filter item=item key=key}
+	listTable.filter.{$key} = '{$item}';
+	{/foreach}
+	listTable.filter.goodsId = {$goods_id};
+	
+	$(document).on("click","a[ectype='view_detail']",function(){
+		
+		var log_id = $(this).data('logid');
+		var step = $(this).data('step');
+		
+		$.jqueryAjax('goods.php', 'act=view_detail' + '&log_id=' + log_id + '&step=' + step, function(data){
+			var content = data.content;
+			pb({
+				id:"categroy_dialog",
+				title:jl_view_info,
+				width:560,
+				content:content,
+				ok_title:jl_determine,
+				cl_title:jl_cancel,
+				drag:true,
+				foot:false
+			});
+		});
+	});
+    </script>
+</body>
+</html>
+{/if}

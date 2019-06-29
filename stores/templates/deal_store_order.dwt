@@ -1,0 +1,140 @@
+<!-- $Id: deal_store_order.htm 16854 2009-12-07 06:20:09Z sxc_shop $ -->
+<!--付款自提 start-->
+<!--{if $form_action eq 'pick_goods'}-->
+<form method="post" action="order.php" name="theForm" enctype="multipart/form-data">
+	<div class="store_order_page">
+		<div class="store_order_section">
+			<span class="store_order_title">{$lang.consignee_info}</span>
+			<p class="mt5">{$lang.seller_name}：{$order_info.consignee}</p>
+			<p>{$lang.link_phone}：{$order_info.mobile}</p>
+			<p>{$lang.complete_store_address}：{$store_info.complete_store_address}</p>
+			{if $order_info.postscript}
+			<p>{$lang.order_message}：{$order_info.postscript}</p>
+			{/if}
+		</div>
+		<div class="store_order_section">
+			<span class="store_order_title">{$lang.order_goods}</span>
+            {foreach from=$order_goods_list item=goods}
+            <div class="store_order_product">
+            	<div class="img"><img src="{$goods.goods_thumb}" width="50" height="50"></div>
+                <div class="info">
+                	<div class="name">{$goods.goods_name}</div>
+                    <div class="lie">
+                    	<span>{$lang.goods_number}：{$goods.goods_number}</span>
+                        <span>{$lang.f_price}：{$goods.formated_goods_price}</span>
+                    </div>
+                </div>
+            </div>
+            {/foreach}
+		</div>
+        <div class="store_order_section">
+			<span class="store_order_title">{$lang.self_lift_validate}</span>
+			{if $order_info.pay_status neq 2}<span class="store_order_note">{$lang.store_order_note}<span class="price">{$order_info.formated_total_fee}</span>{$lang.store_order_note_two}</span>{/if}
+            <div class="store_order_input">
+            	<span class="input">
+                    <input type="text" name="pick_code" value="" class="pick_code text" placeholder="{$lang.code_placeholder}" autocomplete="off">
+                    <span id="notic"></span>
+                </span>
+            </div>
+            <p class="notic">{$lang.code_notic}</p>
+		</div>
+        <div class="store_button_info">
+        	<input type="button" name="button" class="submit" value="{$lang.submit}">
+        </div>
+		<input type="hidden" name="act" value="{$form_action}" />
+		<input type="hidden" name="id" value="{$id}" />
+		<input type="hidden" name="order_id" value="{$order_id}" />
+	</div>
+</form>
+<script type="text/javascript">
+	$(".submit").click(function(){
+    var form = $(this).parents("form[name='theForm']")
+		var code = form.find(".pick_code").val();
+		var id= form.find("input[name='id']").val();
+		var order_id= form.find("input[name='order_id']").val();
+		$.jqueryAjax("order.php", "act=pick_goods" + "&id=" + id + "&order_id=" + order_id + "&pick_code=" + code, function(data){
+			if(data.error == 1){
+				window.location.href = "order.php?act=list"; 
+			}else{
+				$("#notic").html(data.message);
+			}
+		});
+	});
+</script>
+<!--{/if}-->
+<!--付款自提 end-->
+
+<!--我要抢单 start-->
+<!--{if $form_action eq 'grab_order'}-->
+<form method="post" action="order.php" name="theForm" enctype="multipart/form-data">
+	<div class="store_order_page">
+		<div class="store_order_section">
+			<span class="store_order_title">{$lang.consignee_info}</span>
+			<p>{$lang.seller_name}：{$order_info.consignee}</p>
+			<p>{$lang.link_phone}：{$order_info.mobile}</p>
+			<p>{$lang.receiving_address}：{$complete_user_address}</p>
+			{if $order_info.postscript}
+			<p>{$lang.order_message}：{$order_info.postscript}</p>
+			{/if}
+		</div>
+        <div class="store_button_info">
+        	<input type="button" name="submit" class="submit" value="{$lang.confirm_robbing}" onclick="send_form_data('form[name=theForm]')">
+        </div>
+		<input type="hidden" name="act" value="{$form_action}" />
+		<input type="hidden" name="id" value="{$id}" />		
+		<input type="hidden" name="order_id" value="{$order_id}" />		
+	</div>
+</form>
+<!--{/if}-->
+<!--我要抢单 end-->
+
+<!--门店发货 start-->
+<!--{if $form_action eq 'delivery' || $form_action eq 'achieve'}-->
+<form method="post" action="order.php" name="theForm" enctype="multipart/form-data">
+	<div class="store_order_page">
+		<div class="store_order_section">
+			<span class="store_order_title">{$lang.consignee_info}</span>
+			<p>{$lang.seller_name}：{$order_info.consignee}</p>
+			<p>{$lang.link_phone}：{$order_info.mobile}</p>
+			<p>{$lang.receiving_address}：{$complete_user_address}</p>
+			{if $order_info.postscript}
+			<p>{$lang.order_message}：{$order_info.postscript}</p>
+			{/if}
+		</div>
+        <div class="store_order_section">
+			<span class="store_order_title">{$lang.order_goods}</span>
+            {foreach from=$order_goods_list item=goods}
+            <div class="store_order_product">
+            	<div class="img"><img src="{$goods.goods_thumb}" width="50" height="50"></div>
+                <div class="info">
+                	<div class="name">{$goods.goods_name}</div>
+                    <div class="lie">
+                    	<span>{$lang.goods_number}：{$goods.goods_number}</span>
+                        <span>{$lang.f_price}：{$goods.formated_goods_price}</span>
+                    </div>
+                </div>
+            </div>
+            {/foreach}
+        </div>
+        <!--{if $form_action neq 'achieve'}-->
+        <div class="store_order_section">
+            <span class="store_order_title">{$lang.express_no}</span>
+            <div class="store_order_input">
+                <span class="input">
+                    <input type="text" name="invoice_no" class="text" placeholder="{$lang.express_no_placeholder}" autocomplete="off">
+                </span>
+            </div>
+        </div>
+        <!--{/if}-->
+		<!--{if $form_action neq 'achieve'}-->
+        <div class="store_button_info">
+			<input type="button" name="submit" class="submit" value="{$lang.confirmation_delivery}" onclick="send_form_data('form[name=theForm]')">
+        </div>
+		<input type="hidden" name="act" value="{$form_action}" />
+		<input type="hidden" name="id" value="{$id}" />		
+		<input type="hidden" name="order_id" value="{$order_id}" />	
+		<!--{/if}-->	
+	</div>
+</form>
+<!--{/if}-->
+<!--门店发货 end-->

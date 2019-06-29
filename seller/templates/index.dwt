@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>{include file ='library/seller_html_head.lbi'}</head>
+
+<body>
+{include file ='library/seller_header.lbi'}
+<div class="ecsc-layout">
+    <div class="site wrapper">
+		{include file ='library/seller_menu_user.lbi'}
+        <div class="ecsc-layout-right">
+            <div class="main-content" id="mainContent">
+                <div class="top-container">
+                    <div class="basic-info">
+                    	<div class="ecsc-seller-info">
+                        	<div class="store-logo"><img src="{$seller_info.logo_thumb}" /></div>
+                            <div class="store-info">
+                            	<div class="seller-name">{$seller_info.shop_name}</div>
+                                <div class="seller-desc">
+                                	<div class="item">
+                                    	<span><em>{$lang.label_user_name}</em><strong>{$seller_info.user_name}</strong></span>
+                                        <span class="store-name"><em>{$lang.label_shop_name}</em><strong><a href="../merchants_store.php?merchant_id={$ru_id}" target="_blank">{$seller_info.shopName}</a></strong></span>
+                                    </div>
+                                    <div class="item">
+                                    	<span><em>{$lang.label_manage_power}</em><strong>{$lang.manager}</strong></span>
+                                        <span><em>{$lang.label_last_login}</em><strong>{$seller_info.last_login}</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-items">
+                                <ul>
+                                    <li><a href="order.php?act=list&shipped_deal=shipped_deal">{$lang.wait_process_order}<em>({$order.shipped_deal})</em></a></li>
+                                    <li><a href="favourable.php?act=list">{$lang.now_promotion_act}<em>({$favourable_count})</em></a></li>
+                                    <li><a href="favourable.php?act=list&fav_dateout=1">{$lang.coming_expire_act}<em>({$favourable_dateout_count})</em></a></li>
+                                    <li><a href="order.php?act=return_list">{$lang.return_exchange_order}<em>({$order.return_number})</em></a></li>
+                                    <li><a href="comment_manage.php?act=list&reply=1">{$lang.wait_goods_reply_ask}<em>({$reply_count})</em></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-rate">
+                        	<div class="title">{$lang.shop_dynamic_rank}</div>
+                            <ul>
+                            	<li>
+                                	<div class="canvas" data-per="80">
+                                        <div class="canvas_wrap">
+                                            <div class="circle">
+                                                <div class="circle_item circle_left"></div>
+                                                <div class="circle_item circle_right wth0"></div>
+                                            </div>
+                                            <div class="canvas_num">{$merch_cmt.cmt.commentRank.zconments.score}{$lang.minute}</div>
+                                        </div>
+                                    </div>
+                                    <span>{$lang.desc_is_good}</span>
+                                </li>
+                                <li>
+                                	<div class="canvas" data-per="70">
+                                        <div class="canvas_wrap">
+                                            <div class="circle">
+                                                <div class="circle_item circle_left"></div>
+                                                <div class="circle_item circle_right wth0"></div>
+                                            </div>
+                                            <div class="canvas_num">{$merch_cmt.cmt.commentServer.zconments.score}{$lang.minute}</div>
+                                        </div>
+                                    </div>
+                                    <span>{$lang.service_attitude}</span>
+                                </li>
+                                <li>
+                                	<div class="canvas" data-per="83.4">
+                                        <div class="canvas_wrap">
+                                            <div class="circle">
+                                                <div class="circle_item circle_left"></div>
+                                                <div class="circle_item circle_right wth0"></div>
+                                            </div>
+                                            <div class="canvas_num">{$merch_cmt.cmt.commentDelivery.zconments.score}{$lang.minute}</div>
+                                        </div>
+                                    </div>
+                                    <span>{$lang.delivery_speed}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="seller-cont">
+                    <div class="container_left">
+                        <div class="container type-a type-one">
+                            <div class="hd">
+                                <h3>{$lang.shop_and_goods_tip}</h3>
+                            </div>
+                            <div class="content">
+                                <ul>
+                                    <li><a href="goods.php?act=list&is_on_sale=1" target="_blank">{$lang.shop_and_goods_tip_1}<em>({$seller_goods_info.is_sell})</em></a></li>
+                                    <li><a href="goods.php?act=trash" target="_blank">{$lang.shop_and_goods_tip_2}<em>({$seller_goods_info.is_delete})</em></a></li>
+                                    <li><a href="goods.php?act=list&is_on_sale=0" target="_blank">{$lang.shop_and_goods_tip_3}<em>({$seller_goods_info.is_on_sale})</em></a></li>
+                                    <li><a href="goods.php?act=list&stock_warning=1" target="_blank">{$lang.shop_and_goods_tip_4}<em>({$seller_goods_info.is_warn})</em></a></li>
+                                    <li><a href="goods.php?act=list&intro_type=store_new" target="_blank">{$lang.shop_and_goods_tip_5}<em>({$new_count})</em></a></li>
+                                    <li><a href="goods.php?act=list&intro_type=store_best" target="_blank">{$lang.shop_and_goods_tip_6}<em>({$best_count})</em></a></li>
+                                    <li><a href="goods.php?act=list&intro_type=store_hot" target="_blank">{$lang.shop_and_goods_tip_7}<em>({$hot_count})</em></a></li>
+                                    <li><a href="goods.php?act=list&intro_type=is_promote" target="_blank">{$lang.shop_and_goods_tip_8}<em>({$promotion_count})</em></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="container type-a type-two">
+                            <div class="hd">
+                                <h3>{$lang.transaction_tip}</h3>
+                            </div>
+                            <div class="content">
+                                <ul>
+                                	<li><a href="order.php?act=list&serch_type=0" target="_blank">{$lang.transaction_tip_1}<em>({$order.unconfirmed})</em></a></li>
+                                    <li><a href="order.php?act=list&serch_type=100" target="_blank">{$lang.transaction_tip_2}<em>({$order.await_pay})</em></a></li>
+                                    <li><a href="order.php?act=list&serch_type=101" target="_blank">{$lang.transaction_tip_3}<em>({$order.await_ship})</em></a></li>
+                                    <li><a href="order.php?act=list&serch_type=102" target="_blank">{$lang.transaction_tip_4}<em>({$order.finished})</em></a></li>
+                                    <li><a href="goods_booking.php?act=list_all" target="_blank">{$lang.transaction_tip_5}<em>({$booking_goods})</em></a></li>
+                                    <li><a href="goods.php?act=no_comment" target="_blank">{$lang.transaction_tip_6}<em>({$no_comment})</em></a></li>
+                                    {if $complaint_count gt 0}
+                                    <li><a href="complaint.php?act=list" target="_blank">{$lang.transaction_tip_7}<em>({$complaint_count})</em></a></li>
+                                    {/if}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container_right">
+                        <div class="container type-b type-b-one">
+                            <div class="hd">
+                                <h3>{$lang.seller_help}</h3>
+                            </div>
+                            <div class="content">
+                                <ul>
+                                    {foreach from=$articles item=vo}
+                                    <li><a target="_blank" href="../article.php?id={$vo.article_id}" title="{$vo.title}">{$vo.title}</a></li>
+                                    {/foreach}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="container type-b type-b-two">
+                            <div class="hd">
+                                <h3>{$lang.contact_way}</h3>
+                            </div>
+                            <div class="content">
+                                <ul>
+                                    <li>{$lang.label_telephone}{$seller_info.kf_tel}</li>
+                                    <li>{$lang.lable_email}{$seller_info.seller_email}</li>
+                                    <li>{$lang.lable_address}{$seller_info.shop_address}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="seller-cont">
+                	<div class="hd">
+                        <h3>{$lang.shop_data}<font style="font-size:12px; color:#7d7d7d">{$lang.deal_is_real}</font></h3>
+                    </div>
+                    <div class="main-left">
+                    	<div class="container">
+                            <div class="container-left"><i class="shop-icon shop-icon-pc"></i></div>
+                            <div class="container-right">
+                                <ul>
+                                    <li>{$lang.shop_data_1}<p>{$today_sales.format_sales|default:0}</p></li>
+                                    <li>{$lang.shop_data_2}<p>{$today_sales.format_count|default:0}</p></li>
+                                    <li>{$lang.shop_data_3}<p>{$today_sub_order.sub_order|default:0}</p></li>
+                                </ul>
+                                <ul>
+                                    <li>{$lang.shop_data_4}<p>{$yes_sales.format_sales|default:0}</p></li>
+                                    <li>{$lang.shop_data_5}<p>{$yes_sales.format_count|default:0}</p></li>
+                                    <li>{$lang.shop_data_6}<p>{$yes_sub_order.sub_order|default:0}</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="container-left"><i class="shop-icon shop-icon-move"></i></div>
+                            <div class="container-right">
+                                <ul>
+                                    <li>{$lang.shop_data_7}<p>{$today_move_sales.format_sales|default:0}</p></li>
+                                    <li>{$lang.shop_data_8}<p>{$today_move_sales.format_count|default:0}</p></li>
+                                    <li>{$lang.shop_data_9}<p>{$today_move_sub_order.sub_order|default:0}</p></li>
+                                </ul>
+                                <ul>
+                                    <li>{$lang.shop_data_10}<p>{$yes_move_sales.format_sales|default:0}</p></li>
+                                    <li>{$lang.shop_data_11}<p>{$yes_move_sales.format_count|default:0}</p></li>
+                                    <li>{$lang.shop_data_12}<p>{$yes_move_sub_order.sub_order|default:0}</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                	<div class="main-right">
+                    	{$lang.today_turnover}<p>{$all_count|default:0}</p>
+                        {$lang.today_shop_deal_rate}<p>{$cj}</p>
+                    </div>
+                </div>
+                <div class="rank-container">
+                	<div class="container type-a">
+                        <div class="hd">
+                            <h3>{$lang.single_sale_rank}</h3>
+                        </div>
+                        <div class="content">
+                            <table class="ecsc-default-table rank">
+                            <thead>
+                                <tr>
+                                    <th width="20%" class="frist">{$lang.rank_name}</th>
+                                    <th width="70%" class="tl">{$lang.goods_info}</th>
+                                    <th width="10%">{$lang.sales_piece}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {foreach from=$goods_info item=vo name=goods_info}
+                            <tr class="bd-line2">
+                                <td class="frist">{$smarty.foreach.goods_info.iteration}</td>
+                                <td class="tl"><a target="_blank" href="../goods.php?id={$vo.goods_id}" class="goods_name"> {$vo.goods_name}</a></td>
+                                <td class="tc">{$vo.goods_shipping_total}</td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="container type-a">
+                        <div class="hd">
+                            <h3>{$lang.sales_statistics}<font style="font-size:12px; color:#7d7d7d">{$lang.deal_is_real}</font></h3>
+                        </div>
+                        <div class="content">
+                            <table class="ecsc-default-table count">
+                            <thead>
+                                <tr>
+                                    <th width="10%" class="frist">{$lang.project}</th>
+                                    <th width="70%">{$lang.order_number_unit}</th>
+                                    <th width="20%">{$lang.order_money_unit}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bd-line2">
+                                    <td class="frist">{$lang.yesterday_sales}</td>
+                                    <td>{$yseterday_shipping_info.order_total}</td>
+                                    <td>{$yseterday_shipping_info.money_total}</td>
+                                </tr>
+                                <tr class="bd-line2">
+                                    <td>{$lang.month_sales}</td>
+                                    <td>{$month_shipping_info.order_total}</td>
+                                    <td>{$month_shipping_info.money_total}</td>
+                                </tr>
+                                <tr class="bd-line2">
+                                    <td>{$lang.all_sales}</td>
+                                    <td>{$total_shipping_info.order_total}</td>
+                                    <td>{$total_shipping_info.money_total}</td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="guide_dialog" ectype="guide_dialog" style="display:none;">
+	<div class="tit">{$lang.seller_index_dialog_title}</div>
+    <div class="guide_content" ectype="guide_content">
+        <div class="guide_step">
+            <div class="item current">
+                <h2>{$lang.seller_index_dialog_tab_1}</h2>
+                <div class="spliy">-------<i class="gicon"></i></div>
+            </div>
+            <div class="item">
+                <h2>{$lang.seller_index_dialog_tab_2}</h2>
+                <div class="spliy">-------<i class="gicon"></i></div>
+            </div>
+            <div class="item">
+                <h2>{$lang.seller_index_dialog_tab_3}</h2>
+                <div class="spliy">-------<i class="gicon"></i></div>
+            </div>
+            <div class="item">
+                <h2>{$lang.seller_index_dialog_tab_4}</h2>
+                <div class="spliy">-------<i class="gicon"></i></div>
+            </div>
+            <div class="item">
+                <h2>{$lang.seller_index_dialog_tab_5}</h2>
+            </div>
+        </div>
+        <div class="guide_list">
+            <div class="guide_item guide_one"><a href="shop_config.php?act=list_edit" target="_blank"><img src="images/guide/guide_img_1.jpg" /></a></div>
+            <div class="guide_item guide_two" style="display:none;"><a href="index.php?act=clear_cache" target="_blank"><img src="images/guide/guide_img_2.jpg" /></a></div>
+            <div class="guide_item guide_three" style="display:none;"><a href="goods.php?act=step_up" target="_blank" class="a_left"></a><a href="merchants_steps.php?act=step_up" target="_blank" class="a_right"></a><img src="images/guide/guide_img_3.jpg" /></div>
+            <div class="guide_item guide_four" style="display:none;"><a href="visualhome.php?act=list" target="_blank" class="a_top"></a><a href="../mobile/index.php?r=admin/editor" target="_blank" class="a_bot"></a><img src="images/guide/guide_img_4.jpg" /></div>
+            <div class="guide_item guide_five" style="display:none;"><a href="visualhome.php?act=list" target="_blank" class="a_top"></a><a href="../mobile/index.php?r=admin/editor" target="_blank" class="a_bot"></a><img src="images/guide/guide_img_5.jpg" /></div>
+        </div>
+        <div class="guide_btn" data-type="0">
+            <a href="javascript:void(0);" class="btn_next" ectype="btnNext">{$lang.know_next}</a>
+            <a href="javascript:void(0);" class="btn_prev btn_disabled" ectype="btnPrev">{$lang.prev_step}</a>
+        </div>
+    </div>
+</div>
+
+{include file ='library/seller_footer.lbi'}
+{insert_scripts files="jquery.purebox.js"}
+<script type="text/javascript">
+	$(".canvas").each(function(){
+		var per = $(this).data("per");
+		if(per>50){
+			$(this).find('.circle').addClass('clip-auto');
+			$(this).find('.circle_right').removeClass('wth0');
+		}
+		$(this).find(".circle_left").css("-webkit-transform","rotate("+(18/5)*per+"deg)");
+	});
+	
+	$(function(){
+		if($.cookie('sellerStartHome') == null){
+			var content = $("*[ectype='guide_dialog']").html();
+			pb({
+				id:"guide_dialog",
+				title:jl_shop_guide,
+				width:1080,
+				height:492,
+				content:content,
+				drag:false,
+				foot:false
+			});
+			
+			$("#guide_dialog .guide_list").perfectScrollbar("destroy");
+			$("#guide_dialog .guide_list").perfectScrollbar();
+			
+			$("*[ectype='btnNext']").on("click",function(){
+				if(!$(this).hasClass("btn_disabled")){
+					var type = $(this).parents(".guide_btn").data("type");
+					var g_con = $(this).parents("*[ectype='guide_content']");
+					
+					g_con.find(".guide_step .item").eq(type+1).addClass("current").siblings().removeClass("current");
+					g_con.find(".guide_list .guide_item").eq(type+1).show().siblings().hide();
+					
+					$(this).parents(".guide_btn").data("type",type+1);
+					$(this).siblings("*[ectype='btnPrev']").removeClass("btn_disabled");
+	
+					if(type == 3){
+						$(this).addClass("btn_disabled");
+						$(this).html(jl_ok_i_know);
+					}else{
+						$(this).removeClass("btn_disabled");
+						$(this).html(jl_know_next);
+					}
+					
+					$("#guide_dialog .guide_list").perfectScrollbar("destroy");
+					$("#guide_dialog .guide_list").perfectScrollbar();
+				}else{
+					$("#guide_dialog,#pb-mask").remove();
+				}
+			});
+			
+			$("*[ectype='btnPrev']").on("click",function(){
+				if(!$(this).hasClass("btn_disabled")){
+					var type = $(this).parents(".guide_btn").data("type");
+					var g_con = $(this).parents("*[ectype='guide_content']");
+	
+					g_con.find(".guide_step .item").eq(type-1).addClass("current").siblings().removeClass("current");
+					g_con.find(".guide_list .guide_item").eq(type-1).show().siblings().hide();
+					
+					$(this).parents(".guide_btn").data("type",type-1);
+					$(this).siblings("*[ectype='btnNext']").removeClass("btn_disabled");
+					$(this).siblings("*[ectype='btnNext']").html(jl_know_next);
+	
+					if(type == 1){
+						$(this).addClass("btn_disabled");
+					}else{
+						$(this).removeClass("btn_disabled");
+					}
+					
+					$("#guide_dialog .guide_list").perfectScrollbar("destroy");
+					$("#guide_dialog .guide_list").perfectScrollbar();
+				}
+			});
+			
+			//生成cookie
+			$.cookie('sellerStartHome','cookieValue', { expires: 1 ,path:'/'});
+		};
+	});
+</script>
+</body>
+</html>

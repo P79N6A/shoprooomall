@@ -1,0 +1,10 @@
+<div class="tabs_info">
+    <ul>
+        <li {if $menu_select.current eq '03_shipping_list'}class="curr"{/if}><a href="shipping.php?act=list">{$lang.03_shipping_list}</a></li>
+        <li {if $menu_select.current eq '04_shipping_transport'}class="curr"{/if}><a href="goods_transport.php?act=list">{$lang.freight_manage}</a></li>
+        <li {if $menu_select.current eq '05_area_list'}class="curr"{/if}><a href="area_manage.php?act=list">{$lang.05_area_list}</a></li>
+        <li {if $menu_select.current eq '09_region_area_management'}class="curr"{/if}><a href="region_area.php?act=list">{$lang.09_region_area_management}</a></li>
+        <li {if $menu_select.current eq '09_warehouse_management'}class="curr"{/if}><a href="warehouse.php?act=list">{$lang.09_warehouse_management}</a></li>
+        <li {if $menu_select.current eq 'shipping_date_list'}class="curr"{/if}><a href="shipping.php?act=date_list">{$lang.self_lifting_time}</a></li>
+    </ul>
+</div>

@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>{include file ='library/seller_html_head.lbi'}</head>
+
+<body>
+{include file ='library/seller_header.lbi'}
+<div class="ecsc-layout">
+    <div class="site wrapper">
+        {include file ='library/seller_menu_left.lbi'}
+        <div class="ecsc-layout-right">
+            <div class="main-content" id="mainContent">
+                {include file ='library/url_here.lbi'}
+                {include file ='library/seller_menu_tab.lbi'}
+                <form method="post" action="team.php?act=insert_update" name="theForm" id="group_buy_form">
+                    <div class="goods_search_div">
+                        <div class="search_select">
+                            <div class="categorySelect">
+                                <div class="selection">
+                                    <input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+                                    <input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
+                                </div>
+                                <div class="select-container" style="display:none;">
+                                    {include file="library/filter_category.lbi"}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="search_select">
+                            <div class="brandSelect">
+                                <div class="selection">
+                                    <input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="{$lang.select_barnd}" autocomplete="off" readonly data-filter="brand_name" />
+                                    <input type="hidden" name="brand_id" id="brand_id" value="0" data-filter="brand_id" />
+                                </div>
+                                <div class="brand-select-container" style="display:none;">
+                                    {include file="library/filter_brand.lbi"}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="search-key">
+                            <input type="text" name="keyword" size="20" class="text text_2 mr10" placeholder="{$lang.keywords}" />
+                            <a href="javascript:void(0);" class="sc-btn sc-blueBg-btn" onclick="searchGoods()">{$lang.search_word}</a>
+                            <input type="hidden" name="ru_id" value="{$ru_id}" />
+                            <input type="hidden" name="cat_id" id="category">
+                        </div>
+                    </div>
+                    <div class="ecsc-form-goods">
+                        <div class="wrapper-list border1">
+                            <dl>
+                                <dt>{$lang.require_field}&nbsp;{$lang.team_goods}：</dt>
+                                <dd>
+                                    <div id="goods_id" class="imitate_select select_w320 mr0">
+                                        <div class="cite">{if $goods.goods_id}{$goods.goods_name}{else}{$lang.please_select}{/if}</div>
+                                        <ul>
+                                            <li class="li_not">{$lang.please_search_goods}</li>
+                                        </ul>
+                                        <input name="goods_id" type="hidden" value="{if $goods.goods_id}{$goods.goods_id}{/if}" id="goods_id_val">
+                                    </div>
+                                  <div class="form_prompt"></div>
+                                </dd>
+                            </dl>
+                            <dl>
+                          <dt>{$lang.require_field}&nbsp;{$lang.team_price}：</dt>
+                            <dd><input id="team_price" id="team_price" name="data[team_price]" type="text" class="text" value="{$goods.team_price}" />
+                            <div class="notic">{$lang.team_buy_goods_price}</div>
+                            </dd>
+                        </dl>
+                        <dl>
+                          <dt>{$lang.require_field}&nbsp;{$lang.how_many_team}：</dt>
+                            <dd>
+                            <input name="data[team_num]" type="text" id="deposit" value="{$goods.team_num}" class="text">
+                            <div class="notic">{$lang.this_team_people_number}</div>
+                            </dd>
+                        </dl>
+
+                        <dl>
+                          <dt>{$lang.require_field}&nbsp;{$lang.start_team_date}：</dt>
+                            <dd><input name="data[validity_time]" type="text" id="validity_time" value="{$goods.validity_time}" size="30" class="text">
+                            <div class="notic">{$lang.notice_start_team_date}</div>
+                            </dd>
+                        </dl>
+						            {if $virtual_limit_nim == 1}
+                        <dl>
+                          <dt>{$lang.buy_people}：</dt>
+                            <dd><input name="data[limit_num]" type="text" id="limit_num" value="{$goods.limit_num}" size="30" class="text">
+                            <div class="notic">{$lang.notice_buy_people}</div>
+                            </dd>
+                        </dl>
+						            {/if}
+                        <dl>
+                          <dt>{$lang.require_field}&nbsp;{$lang.limit_buy_number}：</dt>
+                            <dd><input name="data[astrict_num]" type="text" id="astrict_num" value="{$goods.astrict_num}" size="30" class="text">
+                            <div class="notic">{$lang.notice_limit_buy_number}</div>
+                            </dd>
+                        </dl>
+                        <dl>
+                          <dt>{$lang.require_field}&nbsp;{$lang.team_channel}：</dt>
+                            <dd>
+                            <select name="data[tc_id]" class="imitate_select select_w320 mr0" >
+                                  <option value="0">{$lang.select_team_channel}</option>
+                                  {foreach from=$team_list item=cat}
+                                    <option value="{$cat.tc_id}" {if $goods['tc_id'] eq $cat['tc_id']}selected{/if}>{$cat.name}</option>
+
+                                    {foreach from=$cat.id item=val}
+                                         <option value="{$val.tc_id}" {if $goods['tc_id'] eq $val['tc_id']}selected{/if}>&nbsp;&nbsp;&nbsp;
+                                         {$val.name}</option>
+                                    {/foreach}
+                                  {/foreach}
+                                 <!--  {$team_list} -->
+                            </select>
+                            </dd>
+                        </dl>
+                        <dl>
+                          <dt>{$lang.team_intro}：</dt>
+                            <dd>
+                           <!--  <input name="data[astrict_num]" type="text" id="astrict_num" value="{$goods.astrict_num}" size="30" class="text"> -->
+                           <textarea name="data[team_desc]" cols="40" rows="3" class="textarea">{$goods.team_desc}</textarea>
+
+                            <div class="notic"></div>
+                            </dd>
+                        </dl>
+                        <dl class="button_info">
+                          <dt>&nbsp;</dt>
+                            <dd>
+                            <input name="id" type="hidden" id="id" value="{$goods.id}">
+                            <input type="submit" name="submit" value="{$lang.button_submit}" class="sc-btn sc-blueBg-btn btn35" id="submitBtn" />
+                            <input type="reset" value="{$lang.button_reset}" class="sc-btn btn35 sc-blue-btn" />
+                            </dd>
+                        </dl>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{include file ='library/seller_footer.lbi'}
+<script type="text/javascript">
+<!--
+{literal}
+$(function(){
+  //表单验证
+  $("#submitBtn").click(function(){
+    if($("#group_buy_form").valid()){
+      $("#group_buy_form").submit();
+    }
+  });
+
+  $('#group_buy_form').validate({
+    errorPlacement:function(error, element){
+      var error_div = element.parents('dl').find('div.form_prompt');
+      //element.parents('dl').find(".notic").hide();
+      error_div.append(error);
+    },
+    rules:{
+      goods_id :{
+        required : true
+      },
+      restrict_amount:{
+        digits : true
+      },
+      gift_integral:{
+        digits : true
+      }
+    },
+    messages:{
+      goods_id:{
+        required : '<i class="icon icon-exclamation-sign"></i>'+jl_select_team_goods
+      },
+      restrict_amount:{
+        digits : '<i class="icon icon-exclamation-sign"></i>'+jl_you_no,
+      },
+      gift_integral:{
+        digits : '<i class="icon icon-exclamation-sign"></i>'+jl_you_no
+      }
+    }
+  });
+
+  //团购商品下拉选择
+  $.divselect("#goods_id","#goods_id_val",function(obj){
+    var value = obj.data("value");
+    groupGoods(value);
+  });
+});
+
+function groupGoods(val){
+  var filter = new Object;
+  filter.goods_id = val;
+
+  Ajax.call('team.php?is_ajax=1&act=group_goods', filter, groupGoodsResponse, 'GET', 'JSON');
+}
+
+function groupGoodsResponse(result){
+  $('#market_price').html(result.content.marketPrice);
+}
+
+/**
+* 搜索商品
+*/
+function searchGoods()
+{
+ var form = $("#group_buy_form");
+ var filter = new Object;
+ filter.cat_id   = form.find("input[name='category_id']").val();
+ filter.brand_id = form.find("input[name='brand_id']").val();
+ filter.keyword  = form.find("input[name='keyword']").val();
+ filter.ru_id = form.find("input[name='ru_id']").val();
+
+ Ajax.call('team.php?is_ajax=1&act=search_goods', filter, searchGoodsResponse, 'GET', 'JSON');
+}
+
+function searchGoodsResponse(result)
+{
+       $("#goods_id").children("ul").find("li").remove();
+
+       var goods = result.content;
+       if (goods)
+       {
+               for (i = 0; i < goods.length; i++)
+               {
+                       $("#goods_id").children("ul").append("<li><i class='sc_icon sc_icon_no'></i><a href='javascript:;' data-value='"+goods[i].goods_id+"' class='ftx-01'>"+goods[i].goods_name+"</a><input type='hidden' name='user_search[]' value='"+goods[i].value+"'></li>")
+               }
+       }
+}
+
+
+{/literal}
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+    "name": "ectouch/dagger",
+    "authors": [
+        {
+            "name": "carson",
+            "email": "docxcn@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.9"
+    }
+}

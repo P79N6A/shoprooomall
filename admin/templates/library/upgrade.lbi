@@ -1,0 +1,46 @@
+<div class="list-div">
+	<table cellpadding="0" cellspacing="0" border="0">
+		<tbody>
+        	<tr>
+				<td align="center">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="left"><div class="ml10">{$lang.upgrade_tip_1}{$ecs_version}{$lang.upgrade_tip_2}</div></td>
+			</tr>
+            {if $cat_belongs eq 0}
+            <tr>
+				<td align="left">
+                	<div class="ml10">
+                        <div class="common-head">
+                            <div class="fl">
+                            	{$lang.upgrade_tip_3}
+                                <a href="category_store.php?act=category_separate"><div class="fbutton"><div class="add" title="{$lang.split_plat_cate}"><span><i class="icon icon-plus"></i>{$lang.split_plat_cate}</span></div></div></a>
+                                {$lang.upgrade_tip_4}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+			</tr>
+            {/if}
+            
+            {if $brand_belongs eq 0}
+            <tr>
+				<td align="left">
+                	<div class="ml10">
+                        <div class="common-head">
+                            <div class="fl">
+                            	{$lang.upgrade_tip_5}
+                                <a href="brand.php?act=brand_separate"><div class="fbutton"><div class="add" title="{$lang.brand_id}"><span><i class="icon icon-plus"></i>{$lang.use_plat_brand_id}</span></div></div></a>
+                                {$lang.upgrade_tip_4}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+			</tr>
+            {/if}
+            <tr>
+				<td align="center">&nbsp;</td>
+			</tr>
+		</tbody>
+	</table>        
+</div>

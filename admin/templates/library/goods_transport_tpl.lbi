@@ -1,0 +1,39 @@
+<table class="t-tab mt10">
+    <tr>
+        <th width="15%">{$lang.03_shipping_list}</th>
+        <th width="20%">{$lang.region_name}</th>
+        <th width="40%">{$lang.jurisd_area}</th>
+        <th width="15%" class="handle">{$lang.handler}</th>
+    </tr>
+    
+    {foreach from=$shipping_tpl item=shipping}
+    	{foreach from=$shipping.area_list item=list key=key name='nolist'}
+        {if $key eq 0}
+        <tr data-shipping_id="{$shipping.shipping_id}">
+            <td rowspan="{$shipping.area_count}">
+                <p>
+                    <strong>{$lang.label_express_name}</strong>
+                    <span calss="shipping_name">{$shipping.shipping_name}</span>
+                </p>
+                <p><input type="button" value="{$lang.add_area}" class="button" data-role="add_shipping_area" ectype="add_shipping_area"></p>
+            </td>
+            <td align="center">{$list.tpl_name}</td>
+            <td><div class="tpl_region">{$list.region_list}</div></td>
+            <td align="center">
+                <input type="button" value="{$lang.edit}" class="button" ectype="edit_shipping" data-id="{$list.id}" data-role="edit_shipping">
+                <input type="button" value="{$lang.drop}" class="button" ectype="drop_shipping" data-id="{$list.id}" data-role="drop_shipping">
+            </td>
+        </tr>
+        {else}
+        <tr data-shipping_id="{$shipping.shipping_id}">
+        	<td align="center">{$list.tpl_name}</td>
+            <td><div class="tpl_region">{$list.region_list}</div></td>
+            <td align="center">
+                <input type="button" value="{$lang.edit}" class="button" ectype="edit_shipping" data-id="{$list.id}" data-role="edit_shipping">
+                <input type="button" value="{$lang.drop}" class="button" ectype="drop_shipping" data-id="{$list.id}" data-role="drop_shipping">
+            </td>
+        </tr>
+        {/if}
+    	{/foreach}
+    {/foreach}
+</table>

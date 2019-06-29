@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+{include file ='library/admin_html_head.lbi'}
+
+<style>
+.dsc-store-item{ display:block; position:relative; float:left;}
+
+.s-score{ width:160px; height:18px; line-height:18px; border:1px dashed #dbdbdb; background:#fff; border-radius:9px; padding:0 5px; margin:10px 0; cursor:pointer;}
+.s-score span{ float:left;}
+.s-score .score-icon{ display:block; float:left; width:60px; height:12px; background:url(../themes/ecmoban_dsc2017/images/dsc-icon.png) -298px 0 no-repeat; margin:2px 3px 0 0;}
+.s-score .score-icon-bg{ float:left; height:12px; width:60px; background:url(../themes/ecmoban_dsc2017/images/dsc-icon.png) -298px -16px no-repeat;}
+.s-score .iconfont{ font-size:12px; margin-left:5px;}
+.s-score-info{ position:absolute; width:150px; background-color:#fff; z-index:10; padding:0 13px; border:1px dashed #dbdbdb; border-radius:0 0 10px 10px; top:25px; left:0; display:none;}
+.s-score-info .s-cover{ position:absolute; width:120px; height:2px; background:#fff; top:-1px; left:0;}
+.s-score-info .g-s-parts{ margin-top:13px;}
+.s-score-info .tel{ text-align:center; width:100%; overflow:hidden; padding:10px 0; border-top:1px dashed #dbdbdb; margin-top:6px; color:#8c8c8c;}
+.s-score-info .store-href{ text-align:center; padding:15px 0 16px;}
+.s-score-info .store-home{ float:none; width:68px; margin:0 auto;}
+
+.s-score-info .g-s-other{ padding:10px 0 0; border-top:1px dashed #dbdbdb; margin-top:6px; color:#8c8c8c;}
+.s-score-info .g-s-other .lie{ overflow:hidden; line-height:24px;}
+.s-score-info .g-s-other .label{ float:left; width:40%; text-align:center;}
+.s-score-info .g-s-other .value{ float:left; margin-left:5px;}
+.s-score-info .g-s-other .value .licence{ margin-top:-3px; width:20px;}
+
+
+</style>
+
+</head>
+<body class="iframe_body">
+	<div class="p10">
+        <div class="content p10">
+<!--         	<div class="explanation" id="explanation">
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <ul>
+                	<li>查看店铺信息</li>
+                </ul>
+            </div> -->
+            <div class="flexilist">
+                <div class="common-content">
+                	<div class="mian-info">
+
+						<div class="switch_info">
+                        	<div class="items">
+                            	<div class="item">
+                                	<div class="label">店主账号：</div>
+                                    <div class="label_value">{$shop_information.user_name}</div>
+                                </div>
+                                <div class="item">
+                                	<div class="label">认证手机：</div>
+                                    <div class="label_value">{$shop_information.mobile_phone} {if $shop_information.mobile_phone}<div><a  href="javascript:;" class="js-sendsms" >到期短信提醒</a></div>{/if}</div>
+                                </div>
+                                <div class="item">
+                                	<div class="label">认证邮箱：</div>
+                                    <div class="label_value">{$shop_information.email} {if $shop_information.email}<div><a href="javascript:;" class="js-sendemail">到期邮件提醒</a></div>{/if}</div>
+                                </div>
+<!--                                 <div class="item">
+                                    <div class="label">申请时间：</div>
+                                    <div class="label_value">{$shop_information.add_time}</div>
+                                </div> -->
+                                <div class="item">
+                                    <div class="label">开店时间：</div>
+                                    <div class="label_value">{$shop_information.grade_add_time}</div>
+                                </div>
+                                <div class="item">
+                                    <div class="label">到期时间：</div>
+                                    <div class="label_value">{$shop_information.grade_end_time}</div>
+                                </div>
+                            </div>
+
+                            <div class="items">
+                            	<div class="item">
+                                	<div class="label">平台保证金/加盟费：</div>
+                                    <div class="label_value">{if $shop_information.total_amount}<em class="ftx-01">{$shop_information.total_amount}</em>{else}未缴纳{/if}</div>
+                                </div>
+                                <div class="item">
+                                    <div class="label">店铺等级：</div>
+                                    <div class="label_value">{if $shop_information.grade_img}<img src="{$shop_information.grade_img}" title="{$shop_information.grade_name}" width="20"/>{/if}</div>
+                                </div>
+                                <div class="item">
+                                    <div class="label">店铺评分：</div>
+                                    <div class="label_value">
+                                        <ul>
+                                            <li class="s-score">
+                                                <span class="pr5">综合评分：<em class="col2 ftx-01">{$merch_cmt.cmt.all_zconments.score}</em> </span>
+                                                <span class="score-icon"><span class="score-icon-bg" style="width:{$merch_cmt.cmt.all_zconments.allReview}%;"></span></span>
+                                            </li>
+
+                                            <li>
+                                            <div class="parts-item parts-goods">
+                                                <span class="col1">商品评价{$lang.evaluation_single}</span>
+                                                <span class="col2 {if $merch_cmt.cmt.commentRank.zconments.is_status eq 1}ftx-02{elseif $merch_cmt.cmt.commentRank.zconments.is_status eq 2}average{else}ftx-01{/if}">{$merch_cmt.cmt.commentRank.zconments.score}</span>
+                                            </div>
+                                            </li>
+                                            <li>
+                                            <div class="parts-item parts-goods">
+                                                <span class="col1">服务态度{$lang.service_attitude}</span>
+                                                <span class="col2 {if $merch_cmt.cmt.commentServer.zconments.is_status eq 1}ftx-02{elseif $merch_cmt.cmt.commentServer.zconments.is_status eq 2}average{else}ftx-01{/if}">{$merch_cmt.cmt.commentServer.zconments.score}</span>
+                                            </div>
+                                            </li>
+                                            <li>
+                                            <div class="parts-item parts-goods">
+                                                <span class="col1">发货速度{$lang.delivery_speed}</span>
+                                                <span class="col2 {if $merch_cmt.cmt.commentDelivery.zconments.is_status eq 1}ftx-02{elseif $merch_cmt.cmt.commentDelivery.zconments.is_status eq 2}average{else}ftx-01{/if}">{$merch_cmt.cmt.commentDelivery.zconments.score}</span>
+                                            </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+							</div>    
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+$(function(){
+
+    setTimeout(function(){
+         $('.nyroModalCont').width(700); 
+         $('.nyroModalWrapper').width(700);
+    }, 100);
+
+    var user_id = '{$shop_information.user_id}';
+    var grade_end_time = '{$shop_information.grade_end_time}';
+
+    // 短信提醒
+    $('.js-sendsms').click(function(){
+        var mobile_phone = '{$shop_information.mobile_phone}';
+
+        if (mobile_phone) {
+            $.post('merchants_users_list.php?act=ajax_send_message', {type:0,id:user_id}, function(res){
+                if (res.error > 0) {
+                    alert('发送短信失败');
+                } else {
+                    alert('发送短信成功');
+                }
+                return false;
+            }, 'json');
+        }
+        return false;
+    });
+
+    // 邮件提醒
+    $('.js-sendemail').click(function(){
+        var email = '{$shop_information.email}';
+
+        if (email) {
+            $.post('merchants_users_list.php?act=ajax_send_message', {type:1,id:user_id}, function(res){
+                if (res.error > 0) {
+                    alert('发送邮件失败');
+                } else {
+                    alert('发送邮件成功');
+                }
+                return false;
+            }, 'json');
+        }
+        return false;
+    });
+
+});
+</script>
+</body>
+</html>

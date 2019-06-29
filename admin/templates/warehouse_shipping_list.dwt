@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>{include file ='library/admin_html_head.lbi'}</head>
+
+<body class="iframe_body">
+	<div class="warpper">
+    	<div class="title">{$lang.11_system} - {$ur_here}111</div>
+        <div class="content">
+        	<div class="tabs_info">
+            	<ul>
+                    <li {if $menu_select.current eq '03_shipping_list'}class="curr"{/if}><a href="shipping.php?act=list">{$lang.distribution_mode}</a></li>
+                    <li {if $menu_select.current eq '05_area_list'}class="curr"{/if}><a href="area_manage.php?act=list">{$lang.region_list}</a></li>
+                    <li {if $menu_select.current eq '09_region_area_management'}class="curr"{/if}><a href="region_area.php?act=list">{$lang.region_manage}</a></li>
+                    <li {if $menu_select.current eq '09_warehouse_management'}class="curr"{/if}><a href="warehouse.php?act=list">{$lang.05_area_list_01}</a></li>
+                    <li {if $menu_select.current eq 'warehouse_ship_list'}class="curr"{/if}><a href="warehouse.php?act=ship_list">{$lang.warehouse_freight_template}</a></li>
+                    <li {if $menu_select.current eq 'shipping_date_list'}class="curr"{/if}><a href="shipping.php?act=date_list">{$lang.data_list}</a></li>
+                </ul>
+            </div>
+            <div class="explanation" id="explanation">
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <ul>
+                	<li>{$lang.operation_prompt_content.shopping_list.0}</li>
+                    <li>{$lang.operation_prompt_content.shopping_list.1}</li>
+                </ul>
+            </div>
+            <div class="flexilist">
+                <div class="common-content">
+                	<div class="list-div" id="listDiv">
+                    	<table cellpadding="0" cellspacing="0" border="0">
+                        	<thead>
+                            	<tr>
+                                    <th width="10%"><div class="tDiv">{$lang.distribution_mode}</div></th>
+                                    <th width="80%"><div class="tDiv">{$lang.distribution_mode_desc}</div></th>
+                                    <th width="10%" class="handle">{$lang.handler}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {foreach from=$shipping_list item=shipping}
+                            	<tr>
+                                    <td><div class="tDiv">{$shipping.shipping_name}</div></td>
+                                    <td><div class="tDiv">{$shipping.shipping_desc}</div></td>
+                                    <td class="handle">
+                                        <div class="tDiv a3">
+                                            <a href="warehouse.php?act=tpl_list&shipping_id={$shipping.shipping_id}" title="{$lang.set_distribution_mode}" class="btn_region"><i class="icon icon-cog"></i>{$lang.set_distribution_mode}</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {foreachelse}
+                                    <tr><td class="no-records" colspan="12">{$lang.no_records}</td></tr>
+                                {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {include file ='library/pagefooter.lbi'}
+    <script type="text/javascript">
+    </script>
+</body>
+</html>

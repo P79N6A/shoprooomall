@@ -1,0 +1,34 @@
+<div class="deliveryInfo sku_goods_info">
+	<table width="100%" class="table">
+		<thead>
+			<tr>
+				<th>{$lang.express}</th>
+				<th>{$lang.post_form_flow_id}</th>
+				<th>{$lang.order_id}</th>
+				<th>{$lang.receipt_infor}</th>
+				<th>{$lang.post_form_id}</th>			
+			</tr>
+		</thead>
+		<tbody>
+			{foreach from=$delivery_orders item=ship key=key name=ship}
+			{foreach from=$ship.list item=order name=order}
+			<tr>
+				{if $smarty.foreach.order.first}
+				<td rowspan="{$ship.count}">{$key}</td>
+				{/if}
+				<td>{$order.delivery_sn}</td>
+				<td>{$order.order_sn}</td>
+				<td><strong class="org"><a href="mailto:{$order.email}"> {$order.consignee|escape}</a></strong>{if $order.mobile} [TEL: {$order.mobile|escape}]{/if}<br>[{$order.region}] {$order.address|escape}</td>
+				<td><input type="text" name="invoice_no[{$order.delivery_id}]" value="" class="text fn"></td>
+			</tr>
+			{/foreach}
+			{/foreach}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>{$lang.memo_info}</td>
+				<td colspan="4"><textarea class="textarea" name="action_note"></textarea></td>
+			</tr>
+		</tfoot>
+	</table>
+</div>

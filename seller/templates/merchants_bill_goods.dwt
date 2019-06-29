@@ -1,0 +1,102 @@
+{if $full_page}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>{include file ='library/seller_html_head.lbi'}</head>
+
+<body>
+{include file ='library/seller_header.lbi'}
+<div class="ecsc-layout">
+    <div class="site wrapper">
+        {include file ='library/seller_menu_left.lbi'}
+        <div class="ecsc-layout-right">
+            <div class="main-content" id="mainContent">
+                {include file ='library/url_here.lbi'}
+				{include file ='library/seller_menu_tab.lbi'}
+                
+                <div class="explanation clear mb20" id="explanation">
+                    <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.reminder}</h4></div>
+                    <ul>
+                    	<li>{$lang.operation_prompt_content.list.0}</li>
+                    	<li>{$lang.operation_prompt_content.bill_goods.2}</li>
+                    	<li>{$lang.operation_prompt_content.bill_goods.3}</li>
+                    </ul>
+                </div>
+                
+                <form method="post" action="" name="listForm" onsubmit="return confirm(batch_drop_confirm);">
+                <div class="list-div" id="listDiv">
+                {/if}
+                  <table class="ecsc-default-table mt20">	
+                    <thead>
+                    <tr>
+                      <th width="6%">{$lang.record_id}</th>
+                      <th width="15%">{$lang.goods_id}</th>
+                      <th width="35%" class="tl">{$lang.goods_name}</th>
+                      <th>{$lang.cate_name}</th>
+                      {if $filter.commission_model eq 1}
+                      <th>{$lang.commission_rate}</th>
+                      {/if}
+                      <th>{$lang.goods_price}</th>
+                      <th>{$lang.goods_number}</th>
+                      {if $is_dir}
+                      <th>{$lang.drp_money}</th>
+                      {/if}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach from=$goods_list item=goods name=noorder}
+                    <tr>
+                      <td >
+                        {$goods.rec_id}
+                      </td>
+                      <td>{$goods.goods_id}</td>
+                      <td class="tl">
+                      	<p>
+                      	{$goods.goods_name}
+                        {if $goods.is_return}<em class="red">{$lang.returned_k}</em>{/if}
+                        </p>
+                      	{if $goods.commission_rate}
+                        <p><em style="color:#31b4e1;">{$lang.label_goods_k}{$goods.commission_rate}%</em></p>
+                        {/if}
+                      </td>
+                      <td>{$goods.cat_name}</td>
+                      {if $filter.commission_model eq 1}
+                      <td>{$goods.proportion}</td>
+                      {/if}
+                      <td>{$goods.goods_price}</td>
+                      <td>{$goods.goods_number}</td>
+                      {if $is_dir}
+                      <td>{$goods.drp_money}</td>
+                      {/if}
+                    </tr>
+                    {foreachelse}
+                    <tr><td class="no-records" colspan="20">{$lang.no_records}</td></tr>
+                    {/foreach}
+                    </tbody>
+                  </table>
+                  {include file="page.dwt"}
+                {if $full_page}
+                </div>
+                </form>					
+                <!--end-->
+                
+            </div>
+        </div>
+    </div>
+</div>
+{include file ='library/seller_footer.lbi'}
+<!--start-->
+<script type="text/javascript">
+  <!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+  listTable.query = "bill_goods_query";
+  
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+  //-->
+</script>
+<!--end-->
+</body>
+</html>
+{/if}

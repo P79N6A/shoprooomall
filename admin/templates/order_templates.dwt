@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>{include file ='library/admin_html_head.lbi'}</head>
+<body class="iframe_body">
+<div class="warpper">
+	<div class="title">{$lang.order_word} - {$ur_here}</div>
+    <div class="content">
+        <div class="explanation" id="explanation">
+            <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            <ul>
+                <li>{$lang.operation_prompt_content.templates.0}</li>
+                <li>{$lang.operation_prompt_content.templates.1}</li>
+                <li>{$lang.operation_prompt_content.templates.2}</li>
+            </ul>
+        </div>
+        <div class="flexilist">
+            <div class="common-content">
+                <div class="mian-info">
+                    <form action="order.php" method="post">
+                        <div class="switch_info">
+                            <div class="tc">{$fckeditor}</div>
+                            <div class="tc info_btn pt20 pb20">
+                                <input type="hidden" name="act" value="{$act}" />
+                                <input type="submit" value="{$lang.button_submit}" class="button fn" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file ='library/pagefooter.lbi'}
+</body>
+</html>

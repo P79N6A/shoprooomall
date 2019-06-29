@@ -1,0 +1,28 @@
+<div class="print-handle">
+	<div class="print-btn"><a href="javascript:void(0);" ectype="btnPreview"><i class="iconfont icon-browse"></i>{$lang.preview}</a></div>
+    <div class="print-btn"><a href="javascript:void(0);" ectype="btnPrint"><i class="iconfont icon-dayin"></i>{$lang.print}</a></div>
+	<div class="print-spec">
+		<label>{$lang.label_print_specification}</label>
+		<div class="imitate_select select_w120" id="print_specification">
+			<div class="cite">{$print_specification}</div>
+			<ul>
+				{foreach from=$print_size_list item=item}
+				<li><a href="javascript:;" data-value="{$item.specification}">{$item.specification}</a></li>
+				{/foreach}
+			</ul>
+			<input name="print_specification" type="hidden" value="{$print_specification}" id="print_specification_val" autocomplete="off">
+		</div>
+		<p>{$lang.print_flow_tip}</p>
+		<p>
+			<span class="red">{$lang.click_button_set}</span>
+			<a href="tp_api.php?act=order_print_setting" target="_blank" class="sc-btn sc-blueBg-btn btn25">{$lang.go_set}</a>
+		</p>
+	</div>
+	<div class="tip">
+		<div class="title">
+			<h1>{$print_size_info.type}</h1>
+			<em>Size: {$print_size_info.size}</em>
+		</div>
+		<div class="desc"></div>
+	</div>
+</div>

@@ -1,0 +1,82 @@
+<!--高级搜索 start-->
+<form method="get" action="javascript:searchOrder()" name="searchOrderForm">
+<div class="gj_search">
+	<div class="search-gao-list" id="searchBarOpen">
+		<i class="icon icon-zoom-in"></i>{$lang.advanced_search}
+	</div>
+	<div class="search-gao-bar" style="right:-350px;">
+		<div class="handle-btn" id="searchBarClose"><i class="icon icon-zoom-out"></i>{$lang.pack_up}</div>
+		<div class="title"><h3>{$lang.advanced_search}</h3></div>
+			<div class="searchContent w300">
+				<div class="layout-box">
+                
+                    <!-- 订单编号 -->
+                    <dl class="w300">
+						<dt>{$lang.order_sn}</dt>
+						<dd>
+							<input type="text" name="order_sn" size="15" class="text w270 mr0" autocomplete="off" />						
+						</dd>
+					</dl>		
+                    <!-- 订单编号 end-->
+                    
+                    <!-- 收货人 -->
+                    <dl class="w300">
+						<dt>{$lang.consignee}</dt>
+						<dd>
+							<input type="text" name="consignee" size="15" class="text w270 mr0" autocomplete="off" />						
+						</dd>
+					</dl>		
+                    <!-- 收货人 end-->
+                    
+                    <!-- 订单分类 -->
+					<dl class="w300">
+						<dt>{$lang.order_type}</dt>
+						<dd>
+							<div id="" class="imitate_select w300">
+								<div class="cite">{$lang.select_please}</div>
+                                <ul>
+                                    <li><a href="javascript:;" data-value="">{$lang.select_please}</a></li>
+                                    <li><a href="javascript:;" data-value="stages">{$lang.order_stages}</a></li>
+                                    <li><a href="javascript:;" data-value="zc">{$lang.order_zc}</a></li>
+                                    <li><a href="javascript:;" data-value="store">{$lang.order_store}</a></li>
+                                    <li><a href="javascript:;" data-value="other">{$lang.order_other}</a></li>
+                                    <li><a href="javascript:;" data-value="dbdd">{$lang.order_dbdd}</a></li>
+                                    <li><a href="javascript:;" data-value="msdd">{$lang.order_msdd}</a></li>
+                                    <li><a href="javascript:;" data-value="tgdd">{$lang.order_tgdd}</a></li>
+                                    <li><a href="javascript:;" data-value="pmdd">{$lang.order_pmdd}</a></li>
+                                    <li><a href="javascript:;" data-value="jfdd">{$lang.order_jfdd}</a></li>
+                                    <li><a href="javascript:;" data-value="ysdd">{$lang.order_ysdd}</a></li>
+                                </ul>
+								<input name="order_cat" type="hidden" value="">
+							</div>
+						</dd>
+					</dl>
+                    <!-- 订单分类 end-->
+                    		
+				</div>
+			</div>
+			<div class="bot_btn">
+				<input type="submit" class="btn red_btn" name="tj_search" value="{$lang.button_inquire}" />
+				<input type="reset" class="btn btn_reset" name="reset" value="{$lang.button_reset_alt}" />
+			</div>
+	</div>
+</div>
+</form>
+<!--高级搜索 end-->	
+
+{literal}
+<script language="JavaScript">
+
+$.gjSearch("-350px");
+function searchOrder()
+{		
+	listTable.filter = [];
+	listTable.filter['id'] = {$user_id|default:0};
+	listTable.filter['order_sn'] = Utils.trim(document.forms['searchOrderForm'].elements['order_sn'].value);
+	listTable.filter['consignee'] = Utils.trim(document.forms['searchOrderForm'].elements['consignee'].value);
+	listTable.filter['order_cat'] = Utils.trim(document.forms['searchOrderForm'].elements['order_cat'].value);
+	listTable.filter['page'] = 1;
+	listTable.loadList();
+}
+</script>
+{/literal}

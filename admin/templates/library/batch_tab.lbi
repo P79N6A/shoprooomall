@@ -1,0 +1,37 @@
+<div class="tabs_info">
+    <ul>
+    	<li {if $menu_select.current eq '15_batch_edit'}class="curr"{/if}><a href="goods_batch.php?act=select">{$lang.batch_edit_goods}</a></li>
+        <li {if $menu_select.current eq '12_batch_pic'}class="curr"{/if}><a href="picture_batch.php">{$lang.batch_handle_picture}</a></li>
+        <li {if $menu_select.current eq '13_batch_add'}class="curr"{/if}><a href="goods_batch.php?act=add">{$lang.batch_upload_goods}</a></li>
+        <li {if $menu_select.current eq '14_goods_export'}class="curr"{/if}><a href="goods_export.php?act=goods_export">{$lang.batch_export_goods}</a></li>
+        <li {if $menu_select.current eq 'goods_auto'}class="curr"{/if}><a href="goods_auto.php?act=list">{$lang.batch_auto_nosale}</a></li>
+        
+        {if $menu_select.current eq 'warehouse_attr_batch'}
+        <li {if $menu_select.current eq 'warehouse_attr_batch'}class="curr"{/if}><a href="goods_warehouse_attr_batch.php?act=add">{$lang.batch_upload_warehouse_attr}</a></li>
+        {/if}
+        
+        {if $menu_select.current eq 'area_attr_batch'}
+        <li {if $menu_select.current eq 'area_attr_batch'}class="curr"{/if}><a href="goods_area_attr_batch.php?act=add">{$lang.batch_upload_area_attr}</a></li>
+        {/if}
+        
+        {if $menu_select.current eq 'back_area_batch_list'}
+        <li {if $menu_select.current eq 'back_area_batch_list'}class="curr"{/if}><a href="goods_area_batch.php?act=add">{$lang.batch_upload_goods_area}</a></li>
+        {/if}
+        
+        {if $menu_select.current eq 'warehouse_batch'}
+        <li {if $menu_select.current eq 'warehouse_batch'}class="curr"{/if}><a href="goods_warehouse_batch.php?act=add">{$lang.batch_upload_warehouse_stock}</a></li>
+        {/if}
+        
+        {if $menu_select.current eq 'produts_batch'}
+        <li {if $menu_select.current eq 'produts_batch'}class="curr"{/if}><a href="goods_produts_batch.php?act=add&goods_id={$goods_id}">{$lang.batch_upload_goods_produts}</a></li>
+        {/if}
+        
+        {if $menu_select.current eq 'produts_warehouse_batch'}
+        <li {if $menu_select.current eq 'produts_warehouse_batch'}class="curr"{/if}><a href="goods_produts_warehouse_batch.php?act=add&goods_id={$goods_id}&warehouse_id={$warehouse_id}">{$lang.batch_upload_warehouse_goods}</a></li>
+        {/if}
+        
+        {if $menu_select.current eq 'produts_area_batch'}
+        <li {if $menu_select.current eq 'produts_area_batch'}class="curr"{/if}><a href="goods_produts_area_batch.php?act=add&goods_id={$goods_id}&area_id={$area_id}">{$lang.batch_upload_area_goods}</a></li>
+        {/if}
+    </ul>
+</div>

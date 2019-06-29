@@ -1,0 +1,30 @@
+{if $transport_area}
+<table class="t-tab mb10">
+	<tr>
+		<td width="50%">{$lang.transport_to}</td>
+		<td width="20%">{$lang.freight_yuan}</td>
+		<td width="20%" align="center">{$lang.handler}</td>
+	</tr>
+	{foreach from=$transport_area item=area}
+	<tr>
+		<td width="60%">
+			{if $area.area_map}
+			{foreach from=$area.area_map item=map}
+			<p><strong>{$map.top_area}：</strong>{$map.area_list}</p>
+			{/foreach}
+			{else}
+			{$lang.unspecified_area}
+			{/if}
+		</td>
+		<td width="20%">
+			<input type="hidden" name="id" value="{$area.id}" />
+			<input type="text" name="sprice[{$area.id}]" class="text w80" autocomplete="off" value="{$area.sprice}" />
+		</td>
+		<td width="30%" align="center">
+			<input type="button" value="{$lang.edit}" class="button" data-role="edit_area" ectype="edit_area">
+			<input type="button" value="{$lang.drop}" class="button" data-role="drop_area" ectype="drop_area">
+		</td>
+	</tr>
+	{/foreach}
+</table>
+{/if}

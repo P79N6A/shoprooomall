@@ -1,0 +1,13 @@
+{if $filter.page_count gt 1}
+<div class="pagination">
+    <ul>
+        <li>{if $filter.page neq 1}<a class="demo" href="javascript:;" onclick="gallery_album_list_pb(this,'1')"><span>{$lang.00_home}</span></a>{else}<span>{$lang.00_home}</span>{/if}</li>
+        <li>{if $filter.page neq 1}<a class="demo" href="javascript:;" onclick="gallery_album_list_pb(this,'{$filter.page}','prev')" ><span>{$lang.page_prev}</span></a>{else}<span>{$lang.page_prev}</span>{/if}</li>
+        {foreach from=$filter.page_arr item=arr}
+        <li>{if $filter.page eq $arr}<span class="currentpage">{$arr}</span>{else}<a class="demo" href="javascript:;" onclick="gallery_album_list_pb(this,'{$arr}')" ><span>{$arr}</span></a>{/if}</li>
+        {/foreach}
+        <li>{if $filter.page neq $filter.page_count}<a class="demo" href="javascript:;" onclick="gallery_album_list_pb(this,'{$filter.page}','next')" ><span>{$lang.page_next}</span></a>{else}<span>{$lang.page_next}</span>{/if}</li>
+        <li>{if $filter.page neq $filter.page_count}<a class="demo" href="javascript:;" onclick="gallery_album_list_pb(this,'{$filter.page_count}')"><span>{$lang.page_last}</span></a>{else}<span>{$lang.page_last}</span>{/if}</li>
+    </ul>
+</div>
+{/if}

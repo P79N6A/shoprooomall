@@ -1,0 +1,27 @@
+<?php
+$data = array (
+  'domain' => 'http://127.0.0.1',
+  'url' => 'http://127.0.0.1/',
+  'shop_name' => 'SHOPROOO',
+  'shop_title' => 'SHOPROOO',
+  'shop_desc' => 'SHOPROOO',
+  'shop_keywords' => 'SHOPROOO',
+  'country' => '中国',
+  'province' => '上海',
+  'city' => '上海',
+  'address' => 'SHOPROOO',
+  'qq' => '12345',
+  'ww' => '12345@qq.com',
+  'ym' => '123456789',
+  'msn' => '',
+  'email' => '12345@qq.com',
+  'phone' => '13354638533',
+  'icp' => '15002903',
+  'version' => 'v2.7.3.3',
+  'release' => '20190313',
+  'language' => 'zh_cn',
+  'php_ver' => '5.6.30',
+  'mysql_ver' => '5.5.19',
+  'charset' => 'utf-8',
+);
+?>

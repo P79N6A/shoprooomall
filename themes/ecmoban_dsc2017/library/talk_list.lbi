@@ -1,0 +1,9 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="talk_list_warp">
+{foreach from=$talk_list item=talk_list key=key}
+<p class="{if $talk_list.talk_member_type eq 1}accuser{elseif $talk_list.talk_member_type eq 2}accseller{else}accadmin{/if}">{$talk_list.talk_time} {$lang.talk_member_type.$talk_list.talk_member_type} ({$talk_list.talk_member_name}) {$lang.say}：{if $talk_list.talk_state eq 1}{$talk_list.talk_content}{else}&lt;{$lang.talk_content_notic}&gt;{/if}</p>
+{foreachelse}
+{$lang.not_conversation}
+{/foreach}
+</div>
+

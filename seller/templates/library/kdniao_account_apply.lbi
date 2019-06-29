@@ -1,0 +1,112 @@
+<form name="account_apply">
+<div class="step_content">
+    <div class="item">
+        <div class="step_label">{$lang.label_express}</div>
+        <div class="step_value">
+            {$shipping_info.shipping_name}
+        </div>
+    </div>
+    <div class="item">
+        <div class="step_label"><i class="red">* </i>{$lang.label_delivery_area}</div>
+        <div class="step_value">
+            <div class="level_linkage">
+                <div class="fl">
+                    <div class="ui-dropdown smartdropdown alien">
+                        <input type="hidden" value="{$customer_account.dsc_province}" name="dsc_province" id="selProvinces">
+                        <div class="txt">{$lang.province_alt}</div>
+                        <i class="down u-dropdown-icon"></i>
+                        <div class="options clearfix" style="max-height:300px;">
+                            <!--<span class="liv" data-text="全国" data-type="0"  data-value="-1">全国</span>-->
+                            {foreach from=$province_list item=list}
+                            <span class="liv" data-text="{$list.region_name}" data-type="2"  data-value="{$list.region_id}">{$list.region_name}</span>
+                            {/foreach}
+                        </div>
+                    </div>
+                    <div id="dlCity" class="ui-dropdown smartdropdown alien">
+                        <input type="hidden" value="{$customer_account.dsc_city}" name="dsc_city" id="selCities">
+                        <div class="txt">{$lang.city}</div>
+                        <i class="down u-dropdown-icon"></i>
+                        <div class="options clearfix" style="max-height:300px;">
+                            <span class="liv hide" data-text="{$lang.city}" data-value="0">{$lang.city}</span>
+                        </div>
+                    </div>
+                    <div id="dlRegion" class="ui-dropdown smartdropdown alien">
+                        <input type="hidden" value="{$customer_account.dsc_district}" name="dsc_district" id="selDistricts">
+                        <div class="txt">{$lang.area_alt}</div>
+                        <i class="down u-dropdown-icon"></i>
+                        <div class="options clearfix" style="max-height:300px;">
+                            <span class="liv hide" data-text="{$lang.area_alt}" data-value="0">{$lang.area_alt}</span>
+                        </div>
+                    </div>
+               </div>
+            </div>       
+        </div>
+    </div>
+    <div class="item">
+        <div class="step_label"><i class="red">* </i>{$lang.label_detail_address}</div>
+        <div class="step_value">
+            <input type="text" name="address" class="text" autocomplete="off" value="{$customer_account.address}" placeholder="{$lang.required}">
+        </div>
+    </div>
+    <div class="item">
+        <div class="step_label"><i class="red">* </i>{$lang.label_dot_name}</div>
+        <div class="step_value">
+            <input type="text" name="station_name" class="text" autocomplete="off" value="{$customer_account.station_name}" placeholder="{$lang.required}">
+        </div>
+    </div>
+    <div class="item">
+        <div class="step_label">{$lang.label_dot_code}</div>
+        <div class="step_value">
+            <input type="text" name="station_code" class="text" autocomplete="off" value="{$customer_account.station_code}" placeholder="{$lang.selection}">
+            <div class="notic w500">{$lang.dot_code_tip}</div>
+        </div>
+    </div>
+    <div class="item hide">
+        <div class="step_label">{$lang.label_monthly_knot_account}</div>
+        <div class="step_value">
+            <input type="text" name="customer_name" class="text" autocomplete="off" value="{$shipping_info.customer_name}" placeholder="{$lang.selection}">
+            <div class="notic w500">{$lang.monthly_knot_account_tip}</div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="step_label">{$lang.label_apply_id}</div>
+        <div class="step_value">
+            <input type="text" name="apply_id" class="text" autocomplete="off" value="{$customer_account.apply_id}" placeholder="{$lang.selection}">
+            <div class="notic w500">{$lang.apply_id_tip}</div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="step_label">{$lang.label_company_name}</div>
+        <div class="step_value">
+            <input type="text" name="company" class="text" autocomplete="off" value="{$customer_account.company}" placeholder="{$lang.selection}">
+        </div>
+    </div>
+    <div class="item">
+        <div class="step_label"><i class="red">* </i>{$lang.label_contacts}</div>
+        <div class="step_value">
+            <input type="text" name="name" class="text" autocomplete="off" value="{$customer_account.name}" placeholder="{$lang.required}">
+        </div>
+    </div>
+    <div class="item">
+        <div class="step_label"><i class="red">* </i>{$lang.label_contact_phone}</div>
+        <div class="step_value">
+            <input type="text" name="mobile" class="text" autocomplete="off" value="{$customer_account.mobile}" placeholder="{$lang.required}">
+            <div class="notic w500">{$lang.contact_phone_tip}</div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="step_label">{$lang.label_phone_number}</div>
+        <div class="step_value">
+            <input type="text" name="tel" class="text" autocomplete="off" value="{$customer_account.tel}" placeholder="{$lang.selection}">
+        </div>
+    </div>
+	<input type="hidden" name="shipping_id" value="{$shipping_info.shipping_id}">
+    <input type="hidden" name="shipper_code" value="{$shipping_spec.kdniao_code}">
+    <input type="hidden" name="act" value="account_submit">
+</div>
+</form>
+
+<script type="text/javascript" src="js/region.js"></script>
+<script type="text/javascript">
+    $.levelLink();//地区三级联动
+</script>

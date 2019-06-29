@@ -1,0 +1,108 @@
+{if $full_page}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>{include file ='library/seller_html_head.lbi'}</head>
+
+<body>
+{include file ='library/seller_header.lbi'}
+<div class="ecsc-layout">
+    <div class="site wrapper">
+        {include file ='library/seller_menu_left.lbi'}
+        <div class="ecsc-layout-right">
+            <div class="main-content" id="mainContent">
+                {include file ='library/url_here.lbi'}
+				{include file ='library/seller_menu_tab.lbi'}
+                <form method="post" action="" name="listForm" onsubmit="return confirm(batch_drop_confirm);">
+                <div class="list-div" id="listDiv">
+                {/if}
+                  <table class="ecsc-default-table mt20">	
+                    <thead>
+                    <tr>
+                      <th width="6%">{$lang.record_id}</th>
+                      <th>{$lang.order_sn}</th>
+                      <th>{$lang.order_total_amount}</th>
+                      <th>{$lang.freight_money}</th>
+                      <th>{$lang.back_money}</th>
+                      {if $is_dir}
+                      <th>{$lang.drp_money}</th>
+                      {/if}
+                      {if $filter.commission_model neq 1}
+                      <th>{$lang.proportion}</th>
+                      {/if}
+                      <th>{$lang.receive_commissions}</th>
+                      {if $filter.commission_model neq 1}
+                      <th>{$lang.proportions}</th>
+                      {/if}
+                      <th>{$lang.period_checkout}</th>
+                      <th>{$lang.all_status}</th>
+                      <th>{$lang.handler}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach from=$order_list item=order name=noorder}
+                    <tr>
+                      <td class="first_td_checkbox">
+                        <div class="first_all">
+                            {$order.order_id}
+                        </div>
+                      </td>
+                      <td>{$order.order_sn}</td>
+                      <td>{$order.format_order_amount}<br/><em class="org2">{$lang.include_freight}</em></td>
+                      <td>{$order.format_shipping_fee}</td>
+                      <td>{$order.format_return_amount}</td>
+                      {if $is_dir}
+                      <td>{$bill.format_drp_money}</td>
+                      {/if}
+                      {if $filter.commission_model neq 1}
+                      <td>{$order.gain_proportion}%</td>
+                      {/if}
+                      <td>
+                      	{if $order.chargeoff_status neq 0 && $order.model eq 0}
+                            <em class="red">{$lang.label_commision_ratio}{$order.gain_proportion}%</em>
+                            <br/>
+                        {/if}
+                        {$order.format_gain_commission}<br/><em class="org2">{$lang.not_include_freight}</em>
+                      </td>
+                      {if $filter.commission_model neq 1}
+                      <td>{$order.should_proportion}%</td>
+                      {/if}
+                      <td>
+                      	{if $order.chargeoff_status neq 0 && $order.model eq 0}
+                            <em class="red">{$lang.label_commision_ratio}{$bill.should_proportion}%</em>
+                            <br/>
+                        {/if}
+                        {$order.format_should_amount}<br/><em class="org2">{$lang.include_freight}</em>
+                      </td>
+                      <td>
+                      	{$lang.os[$order.order_status]}<br />{$lang.ps[$order.pay_status]}<br />{$lang.ss[$order.shipping_status]}
+                      </td>
+                      <td class="ecsc-table-handle tr">
+                      	<span><a href="merchants_commission.php?act=bill_goods&order_id={$order.order_id}&type=1&seller_id={$filter.seller_id}&commission_model={$filter.commission_model}" class="btn-orange"><i class="sc_icon_see"></i><p>{$lang.order_detailed}</p></a></span>
+                      </td>
+                    </tr>
+                    {foreachelse}
+                    <tr><td class="no-records" colspan="20">{$lang.no_records}</td></tr>
+                    {/foreach}
+                    </tbody>
+                  </table>
+                  {include file="page.dwt"}
+                {if $full_page}
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{include file ='library/seller_footer.lbi'}
+<script type="text/javascript">
+	listTable.recordCount = {$record_count};
+	listTable.pageCount = {$page_count};
+	listTable.query = "bill_notake_order_query";
+	
+	{foreach from=$filter item=item key=key}
+	listTable.filter.{$key} = '{$item}';
+	{/foreach}
+</script>
+</body>
+</html>
+{/if}

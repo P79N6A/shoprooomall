@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<!-- #BeginLibraryItem "/library/js_languages_new.lbi" --><!-- #EndLibraryItem -->
+</head>
+
+<body class="merchants bg-ligtGary">
+<!-- #BeginLibraryItem "/library/page_header_merchants.lbi" --><!-- #EndLibraryItem -->
+<div class="container settled-container">
+    {* DSC 提醒您：merchants_index_top_ad.lbi，入驻首页头部小广告 *}{insert name='get_adv_child' ad_arr=$merchants_index_top}
+    <div class="sett-section s-section-step">
+        <div class="w w1200">
+            <div class="sett-title">
+                <div class="zw-tit">
+                    <h3>{$lang.merchants_step}</h3>
+                    <span class="line"></span>
+                </div>
+                <span class="yw-tit">ADVANCE REGISTRATION PROCESS</span>
+            </div>
+            <div class="sett-warp">
+                <div class="item item-one">
+                    <div class="item-i"><i></i></div>
+                    <div class="tit">1 {$lang.sett_step_one}</div>
+                    <span>{$lang.sett_step_one_tit}</span>
+                    <span>{$lang.sett_step_one_desc}</span>
+                </div>
+                <em class="item-jt"></em>
+                <div class="item item-two">
+                    <div class="item-i"><i></i></div>
+                    <div class="tit">2 {$lang.sett_step_two}</div>
+                    <span>{$lang.sett_step_two_tit}</span>
+                    <span>{$lang.sett_step_two_desc}</span>
+                </div>
+                <em class="item-jt"></em>
+                <div class="item item-three">
+                    <div class="item-i"><i></i></div>
+                    <div class="tit">3 {$lang.sett_step_three}</div>
+                    <span>{$lang.sett_step_three_tit}</span>
+                    <span>{$lang.sett_step_three_desc}</span>
+                </div>
+                <em class="item-jt"></em>
+                <div class="item item-four">
+                    <div class="item-i"><i></i></div>
+                    <div class="tit">4 {$lang.sett_step_four}</div>
+                    <span>{$lang.sett_step_four_tit}</span>
+                    <span>{$lang.sett_step_four_desc}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sett-section s-section-cate">
+        <div class="w w1200">
+            <div class="sett-title">
+                <div class="zw-tit">
+                    <h3>{$lang.hot_recruit}</h3>
+                    <span class="line"></span>
+                </div>
+                <span class="yw-tit">BUSINESS CATEGORY</span>
+            </div>
+            <div class="sett-warp">
+                {foreach from=$categories_pro item=cat name=name}
+                {* DSC 提醒您：merchants_index_category_ad.lbi，入驻首页类目小广告 *}{insert name='get_adv_child' ad_arr=$merchants_index_category_ad id=$cat.id}
+                {/foreach}
+            </div>
+        </div>
+    </div>
+    <div class="sett-section s-section-case" style="display:none;">
+        <div class="w w1200">
+            <div class="sett-title">
+                <div class="zw-tit">
+                    <h3>{$lang.success_case}</h3>
+                    <span class="line"></span>
+                </div>
+                <span class="yw-tit">SUCCESSFUL CASE</span>
+            </div>
+            <div class="sett-warp">
+                {* DSC 提醒您：merchants_index_case_ad.lbi，入驻首页类目小广告 *}{insert name='get_adv_child' ad_arr=$merchants_index_case_ad}
+            </div>
+        </div>
+    </div>
+    <div class="sett-section s-section-help">
+        <div class="w w1200">
+            <div class="sett-title">
+                <div class="zw-tit">
+                    <h3>{$lang.common_problem}</h3>
+                    <span class="line"></span>
+                </div>
+                <span class="yw-tit">COMMON PROBLEM</span>
+            </div>
+            <div class="sett-warp">
+                {foreach from=$articles_imp item=art name=name}
+                <div class="item item-{if $smarty.foreach.name.iteration mod 2 eq 0}left{else}right{/if}">
+                    <div class="number">0{$smarty.foreach.name.iteration}</div>
+                    <div class="info">
+                        <div class="name">
+                            <div class="tit"><a href="article.php?id={$art.article_id}" target="_blank">{$art.title}</a></div>
+                            <div class="desc">{$art.description}</div>
+                        </div>
+                    </div>
+                </div>
+                {/foreach}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #BeginLibraryItem "/library/page_footer_flow.lbi" --><!-- #EndLibraryItem -->
+<script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
+<script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/jquery.purebox.js"></script>
+</body>
+</html>
+

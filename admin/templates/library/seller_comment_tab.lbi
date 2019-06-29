@@ -1,0 +1,10 @@
+<div class="tabs_info">
+    <ul>
+        <li {if $menu_select.current eq '13_comment_seller_rank'}class="curr"{/if}>
+            <a href="comment_seller.php?act=list">{$lang.13_comment_seller_rank}</a>
+        </li>
+        <li {if $menu_select.current eq '04_create_seller_grade'}class="curr"{/if}>
+            <a href="merchants_users_list.php?act=create_seller_grade">{$lang.04_create_seller_grade}</a>
+        </li>
+    </ul>
+</div>	

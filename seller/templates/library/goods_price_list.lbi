@@ -1,0 +1,150 @@
+{if $full_page}
+<div class="sku_goods_info">
+	<div class="warehouse_item">
+        <span class="item">
+            <span class="tit">{$lang.product_code}</span>
+            <div class="imitate_select select_w120 pl10">
+                {$goods.goods_sn}
+            </div>						
+        </span>
+        {if $goods.model_attr eq 1}
+        <span class="item">
+            <span class="tit"></span>
+            <div class="search mt0">
+                <div class="input">
+                    <input name="region_sn" id="region_sn" class="text nofocus w140 mr10" placeholder="仓库商品货号" autocomplete="off" type="text">
+                    <input type="button" class="sc-btn sc-blueBg-btn btn30 price_btn" name="secrch_btn" value="{$lang.button_search}">
+                </div>
+            </div>					
+        </span>
+        {elseif $goods.model_attr eq 2}
+        <span class="item">
+            <span class="tit">{$lang.warehouse_name}</span>
+            <div class="imitate_select select_w140" id="warehouse_area_name">
+                <div class="cite" id="w_select_please">{$lang.select_please}</div>
+                <ul>
+                    {foreach from=$warehouse_list item=warehouse name=nowarehouse key=key}
+                    <li><a href="javascript:;" data-value="{$warehouse.region_id}" class="ftx-01" data-name="{$warehouse.region_name}" id="warehouse_{$key}">{$warehouse.region_name}</a></li>
+                    {/foreach}
+                </ul>
+                <input name="warehouse_area_name" type="hidden" value="0" id="warehouse_area_name_val">
+            </div>							
+        </span>
+        <span class="item">
+            <span class="tit"></span>
+            <div class="search mt0">
+                <div class="input">
+                    <input name="region_sn" id="region_sn" class="text nofocus w140 mr10" placeholder="{$lang.area_goods_code}" autocomplete="off" type="text">
+                    <input type="button" class="sc-btn sc-blueBg-btn btn30 price_btn"  value="{$lang.button_search}" name="secrch_btn">
+                </div>
+            </div>					
+        </span>
+        {/if}
+    </div>
+    <div id="goodslistDiv">
+	{/if}    
+        <table class="table">
+            <thead>
+            	{if $goods.model_attr eq 1}
+                <th width="15%">{$lang.warehouse_name}</th>
+                <th width="22%">{$lang.warehouse_goods_code}</th>
+                <th width="21%">{$lang.warehouse_price}</th>
+                <th width="21%">{$lang.warehouse_promotion_price}</th>
+                <th width="21%">{$lang.warehouse_stock}</th>
+                {elseif $goods.model_attr eq 2}
+                <th width="12%">{$lang.warehouse_name}</th>
+                <th width="12%">{$lang.area_name}</th>
+                <th width="12%">{$lang.city_name}</th>
+                <th width="16%">{$lang.area_goods_code}</th>
+                <th width="16%">{$lang.area_price}</th>
+                <th width="16%">{$lang.area_promotion_price}</th>
+                <th width="16%">{$lang.area_stock}</th>
+                {/if}
+            </thead>
+            <tbody>
+            	{if $goods.model_attr eq 1}
+                {foreach from=$warehouse_area_list item=list name=warehouse}
+                <tr>
+                    <td>{$list.region_name}</td>
+                    <td><input class="text w100 tc fn" style="margin-right:0px;" name="warehouse_sn[]" onblur="listTable.editInput(this, 'edit_warehouse_sn', {$list.w_id});" autocomplete="off" value="{$list.region_sn|default:$lang.n_a}" type="text"></td>
+                    <td><input class="text w100 tc fn" style="margin-right:0px;" name="warehouse_price[]" onblur="listTable.editInput(this, 'edit_warehouse_price', {$list.w_id});" autocomplete="off" value="{$list.warehouse_price|default:0.00}" type="text"></td>
+                    <td><input class="text w100 tc fn" style="margin-right:0px;" name="warehouse_promote_price[]" onblur="listTable.editInput(this, 'edit_warehouse_promote_price', {$list.w_id});" autocomplete="off" value="{$list.warehouse_promote_price|default:0.00}" type="text"></td>
+                    <td><input class="text w100 tc fn" style="margin-right:0px;" name="region_number[]" onblur="listTable.editInput(this, 'edit_warehouse_number', {$list.w_id});" autocomplete="off" value="{$list.region_number|default:0}" type="text"></td>
+                </tr> 
+                {foreachelse}
+                <tr><td class="no-records"  colspan="5">{$lang.no_records}</td></tr>								
+                {/foreach}
+                {elseif $goods.model_attr eq 2}
+                {foreach from=$warehouse_area_list item=list name=area}
+                <tr>
+                	<td>{$list.warehouse_name}</td>
+                    <td>{$list.region_name}</td>
+                    <td>{$list.city_name}</td>
+                    <td><input class="text w80 tc fn" style="margin-right:0px;" name="region_sn[]" onblur="listTable.editInput(this, 'edit_region_sn', {$list.a_id});" autocomplete="off" value="{$list.region_sn|default:$lang.n_a}" type="text"></td>
+                    <td><input class="text w60 tc fn" style="margin-right:0px;" name="region_price[]" onblur="listTable.editInput(this, 'edit_region_price', {$list.a_id});" autocomplete="off" value="{$list.region_price|default:0.00}" type="text"></td>
+                    <td><input class="text w60 tc fn" style="margin-right:0px;" name="region_promote_price[]" onblur="listTable.editInput(this, 'edit_region_promote_price', {$list.a_id});" autocomplete="off" value="{$list.region_promote_price|default:0.00}" type="text"></td>
+                    <td><input class="text w60 tc fn" style="margin-right:0px;" name="region_number[]" onblur="listTable.editInput(this, 'edit_region_number', {$list.a_id});" autocomplete="off" value="{$list.region_number|default:0}" type="text"></td>
+                </tr> 
+                {foreachelse}
+                <tr><td class="no-records"  colspan="6">{$lang.no_records}</td></tr>								
+                {/foreach}
+                {/if}
+            </tbody>
+        </table>
+        <div class="pb_page">
+            <div class="pageDiv">
+                <a href="javascript:;" class="item item_first item_gray">共 {$warehouse_area_page_count} 页</a>
+                <a href="javascript:listTable_pb.gotoPageFirst();" class="item item_first">{$lang.00_home}</a>
+                <a href="javascript:listTable_pb.gotoPagePrev();" class="item item_prev">{$lang.page_prev}</a>
+                <span class="item">{$warehouse_area_filter.page}</span>
+                <a href="javascript:listTable_pb.gotoPageNext();" class="item item_next">{$lang.page_next}</a>
+                <a href="javascript:listTable_pb.gotoPageLast();" class="item item_last">{$lang.page_last}</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+{if $full_page}
+	</div>    
+</div>
+<script type="text/javascript">
+
+listTable_pb.recordCount = '{$warehouse_area_record_count}';
+listTable_pb.pageCount = '{$warehouse_area_page_count}';
+listTable_pb.url = "dialog.php?is_ajax=1";
+listTable_pb.query = '{$query}';
+
+{foreach from=$warehouse_area_filter item=item key=key}
+listTable_pb.filter.{$key} = '{$item}';
+{/foreach}
+
+$(function(){
+	{if $goods.model_attr eq 2}
+		var w_name = $("#warehouse_0").data("name");
+		var w_value = $("#warehouse_0").data("value");
+	
+		$("#w_select_please").html(w_name);
+		
+		$("#warehouse_area_name_val").val(w_value);
+		
+		$.divselect("#warehouse_area_name","#warehouse_area_name_val",function(obj){
+			 var value = $(obj).data("value");
+			 
+			 listTable_pb.filter['warehouse_id'] = value;
+			 listTable_pb.filter['page'] = 1;
+		
+			 listTable_pb.loadList();
+		});
+	{/if}
+	
+	$(".price_btn").click(function(){
+		var region_sn = $("#region_sn").val();
+		
+		listTable_pb.filter['region_sn'] = region_sn;
+		listTable_pb.filter['page'] = 1;
+	
+		listTable_pb.loadList();
+	});
+	
+	/*$("[data-toggle='tooltip']").tooltip({});*/
+});
+</script>
+{/if}

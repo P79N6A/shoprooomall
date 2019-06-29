@@ -1,0 +1,7 @@
+<div class="talk_list_warp">
+{foreach from=$talk_list item=talk_list key=key}
+<p class="{if $talk_list.talk_member_type eq 1}accuser{elseif $talk_list.talk_member_type eq 2}accseller{else}accadmin{/if}">{$talk_list.talk_time} {$lang.talk_member_type.$talk_list.talk_member_type} ({$talk_list.talk_member_name}) {$lang.say_colon}{if $talk_list.talk_state eq 1}{$talk_list.talk_content}{else}&lt;{$lang.shielded_talk}&gt;{/if}</p>
+{foreachelse}
+{$lang.no_talk}
+{/foreach}
+</div>

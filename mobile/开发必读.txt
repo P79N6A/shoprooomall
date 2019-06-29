@@ -1,0 +1,27 @@
+二次开发简单说明
+====
+
+## 开发模式
+
+当前 app\custom 目录为二开目录，二次开发主要分类两种类型：
+
+1. 基于现有模块进行再开发
+
+比如该目录下的 site 模块，基于默认的首页模块增加 phpinfo 页面。您需要继承（extends）原有的模块。如果原有模块的方法已经存在，可以在子类中进行覆写。
+
+2. 建立全新模块进行开发
+
+比如该目录下的 guestbook 模块，您可以完全根据自己的业务全新进行设计开发。
+
+3. 模板重写。将默认模块下的views目录的模板文件，复制一份到 对应路径 app/custom/模块名/views/目录下。
+例如： 复制 resources/views/site/index.html 至 app/custom/site/views/index.html  注意文件同名即可。
+
+
+## 关于路由：
+
+基本的路由结构为 mobile/index.php?m=module&c=controller&a=action&key=value
+
+- 模块：module = site
+- 控制器：controller = index
+- 操作：action = phpinfo
+- 参数：key = value（值）
